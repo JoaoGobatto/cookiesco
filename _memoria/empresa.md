@@ -12,6 +12,11 @@
 - Cardápio online: https://cardapio.ai/online/cookiescofloripa — busca, categorias, carrinho, checkout, WhatsApp e cashback de 6%
 - WhatsApp: (48) 98834-0265
 
+**Cookie do mês:** a loja lança um sabor diferente a cada mês, e ele ocupa o primeiro
+slide do site. Agosto/2026: **Cookie Napolitano** — massa de cacau belga, gotas de
+chocolate branco, recheio cremoso de brigadeiro de Nesquik e um pedaço da barra
+Napolitano (Neugebauer) por cima.
+
 **Além do cookie (confirmado pelo dono em ago/2026):** chocolate quente cremoso, fondue de
 cookie e fatias de torta. O fondue é servido em copo da marca **Vanilla cookies&co** — o
 dono confirmou que é produto da casa/marca irmã, então pode aparecer no site.
