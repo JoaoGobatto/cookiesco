@@ -91,63 +91,101 @@ ainda não foram confirmados. `tag` é opcional (o selinho verde).
 ## O cookie do hero
 
 A seção 1 copia a composição do slider da referência: fundo chapado, headline em
-caixa alta, produto flutuando à direita sobre as formas orgânicas. O produto é
-montado em **camadas independentes** — cada uma é um recorte com fundo transparente
-que anda num ritmo diferente quando o mouse passa e se abre no hover.
+caixa alta, produto flutuando à direita sobre as formas orgânicas. Duas coisas são
+próprias daqui: **o produto é montado em camadas** e **o fundo muda de cor conforme
+o cookie que está na tela**.
 
-Camadas atuais, em `assets/img/hero/` (recortadas da foto original que está em
-`identidade/fotos/cookie-original.jpg`):
+### Tema por slide
+
+Cada slide carrega as três cores no próprio HTML:
+
+```html
+<article class="hero__slide" data-bg="#3A231A" data-blob="#52301F" data-blob2="#6B3F27">
+```
+
+- `data-bg` — o fundo chapado da seção
+- `data-blob` / `data-blob2` — as formas orgânicas atrás do produto
+
+O JS lê esses valores do slide ativo e joga em variáveis CSS no `.hero`, com
+transição de 0,7s. Trocar de slide troca a cor da seção inteira junto.
+
+**Como escolher a cor de um cookie novo:** pega o tom dominante da massa (a mediana
+das cores do recorte, ignorando os 15% mais claros, que são recheio e gotas) e
+escurece pra ficar entre 15% e 25% de luminosidade. Foi assim que saíram:
+
+| Slide | Massa | Fundo | Blobs |
+|---|---|---|---|
+| chocolate | `#2F1C16` | `#3A231A` | `#52301F` / `#6B3F27` |
+| red velvet | `#6A0E15` | `#4A121C` | `#661923` / `#86222E` |
+
+Não usar preto puro — o design-guide proíbe, e cookie escuro sobre fundo escuro
+demais some. O chocolate ficou num cacau bem escuro, não em preto.
+
+**A logo não muda de slide.** Enquanto o header flutua sobre o hero ele usa a versão
+original (branco + peach), que é a cor padrão da marca e funciona em qualquer um dos
+fundos escuros. Quando o header fixa no creme, troca pra versão marrom. Menu, botão
+e a barra sangrada seguem a mesma lógica.
+
+### Camadas
+
+Camadas em `assets/img/hero/`, recortadas das fotos em `identidade/fotos/`:
 
 | Arquivo | Camada | Comportamento |
 |---|---|---|
-| `cookie-partido.webp` | cookie partido, com o recheio escorrendo | protagonista, cresce um pouco no hover |
-| `cookie-inteiro.webp` | cookie inteiro | fica atrás, recua e inclina no hover |
-| `chip-1/2/3.webp` | gotas de chocolate soltas | flutuam e se espalham no hover |
+| `cookie-partido.webp` / `rv-partido.webp` | cookie partido, recheio escorrendo | protagonista, cresce no hover |
+| `cookie-inteiro.webp` / `rv-inteiro.webp` | cookie inteiro | fica atrás, recua e inclina no hover |
+| `chip-*.webp` / `rv-chip-*.webp` | gotas de chocolate soltas | flutuam e se espalham no hover |
 
 **Como reposicionar sem mexer em CSS.** Cada camada carrega a própria posição no
-`style` do HTML, em porcentagem do palco:
+`style`, em porcentagem do palco:
 
 ```html
 <div class="stage__layer camada--partido" style="--l:24%;--t:-4%;--w:76%;--f:1.15">
 ```
 
-- `--l` distância da esquerda · `--t` distância do topo · `--w` largura
-- `--f` é a "profundidade": quanto maior, mais a camada corre com o mouse.
-  O cookie de trás usa `.45`, o da frente `1.15`, as gotas `2.2` a `3.1`.
-
-Trocar a foto é trocar o arquivo e, se a proporção mudar, ajustar `--w`/`--t`.
+- `--l` esquerda · `--t` topo · `--w` largura
+- `--f` é a profundidade: quanto maior, mais a camada corre com o mouse.
+  Cookie de trás `.45`, o da frente `1.15`, as gotas `2.2` a `3.1`.
 
 ### Como os recortes foram feitos
 
-A foto original tinha fundo terracota e uma bancada escura embaixo. O recorte saiu
-por detecção de borda (o fundo é um degradê liso, o cookie tem contorno duro),
-depois separação em componentes e limpeza da faixa da bancada. Se quiser refazer
-com outra foto, o caminho manual mais simples é o Gemini, uma imagem por vez:
+As fotos vêm com fundo terracota e uma bancada escura embaixo. O recorte sai por
+detecção de borda — o fundo é um degradê liso e o cookie tem contorno duro — e
+depois três limpezas:
+
+1. **A borda da bancada** entra como um risco fino e comprido colado no cookie.
+   Sai por uma regra geométrica: apagar o que é fino na vertical e longo na
+   horizontal. Os fios de doce também são finos, mas verticais, então ficam.
+2. **O pé do cookie** mergulha na sombra da bancada e o contorno se perde. A máscara
+   cresce ali pra dentro do escuro, limitada à faixa horizontal que o cookie já ocupa.
+3. **Bolsões de fundo presos entre os fios** — invisíveis quando o fundo era peach,
+   evidentes agora que é escuro. Saem por crescimento a partir de sementes que batem
+   com o fundo estimado localmente, limitado pelas mesmas bordas do recorte, o que
+   impede de vazar pra dentro da massa.
+
+Cor sozinha não resolve: no red velvet o fundo terracota e a massa média têm quase
+a mesma razão verde/vermelho.
+
+Pra refazer à mão com outra foto, o caminho mais simples é o Gemini, uma por vez:
 
 > Remova o fundo desta foto e devolva um PNG com fundo transparente. Preserve as
 > bordas do cookie e os fios de recheio, sem halo branco em volta. Não altere cor,
 > textura nem enquadramento.
 
-**Especificação:** fundo transparente, lado maior de 1500px, **sem sombra embutida
-no arquivo** (o CSS aplica a sombra). WebP fica ~8x menor que PNG com a mesma
-qualidade — os dois funcionam, é só ajustar o `src`.
-
-**Fotografando o resto:** fundo liso e claro, luz natural pela lateral, sem flash,
-câmera na altura do cookie. Para render um produto em camadas (tipo o hambúrguer
-desmontado da referência), fotografe cada parte do mesmo ponto, sem mover o
-celular — aí as camadas encaixam sozinhas.
+**Especificação:** fundo transparente, lado maior de 1500px, **sem sombra embutida**
+(o CSS aplica a sombra). WebP fica ~8x menor que PNG com a mesma qualidade.
 
 **Sobre vídeo (Flow):** não vale pro hero. Vídeo com fundo transparente depende de
-WebM/alpha, que o Safari não toca — o cookie apareceria numa caixa preta no iPhone,
-que é metade do público. O Flow rende muito melhor num loop curto na seção do
-fondue (chocolate escorrendo) ou direto no Instagram, e aí é MP4 normal.
+WebM/alpha, que o Safari não toca — o cookie apareceria numa caixa preta no iPhone.
+O Flow rende melhor num loop na seção do fondue ou direto no Instagram, em MP4.
 
-### Slides
+### Pra somar um slide novo
 
-Hoje são 2 destaques, ambos com foto real. Quando chegarem as fotos do fondue e do
-cookie com sorvete, duplicar um `<article class="hero__slide">` no `index.html`
-trocando texto e imagem — o slider conta os slides sozinho, não precisa configurar
-nada.
+1. Manda a foto do cookie (mesmo enquadramento das outras: fundo liso, cookie inteiro
+   à esquerda e partido à direita).
+2. Duplica um `<article class="hero__slide">` no `index.html`, troca texto, imagens
+   e as três cores do tema.
+3. Só isso — o slider conta os slides sozinho e some com as setas se sobrar um só.
 
 ## O que está pendente de confirmação com a loja
 

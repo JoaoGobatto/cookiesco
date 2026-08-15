@@ -118,6 +118,17 @@ p{margin:0 0 1rem}
 }
 /* no topo o header flutua sobre a cor do hero */
 .hd:not(.is-stuck){background:transparent;backdrop-filter:none;border-color:transparent}
+/* o hero é escuro e muda de cor por slide: enquanto o header flutua sobre ele,
+   menu, logo e botões viram claros. Quando fixa no creme, tudo volta ao marrom. */
+.hd:not(.is-stuck) .hd__nav a{color:var(--creme)}
+.hd:not(.is-stuck) .hd__nav a.is-atual{color:var(--peach)}
+.hd:not(.is-stuck) .hd__acoes .btn{--bg:var(--peach);--fg:var(--tinta)}
+.hd:not(.is-stuck) .hd__burger span{background:var(--creme)}
+.hd:not(.is-stuck) .hd__grade{background:var(--peach)}
+.hd:not(.is-stuck) .hd__grade:hover{background:var(--branco)}
+.hd:not(.is-stuck) .hd__grade i{background:var(--marrom-esc)}
+.hd:not(.is-stuck) .brand .logo--claro{display:block}
+.hd:not(.is-stuck) .brand .logo--marrom{display:none}
 .hd.is-stuck{box-shadow:0 12px 30px -24px rgba(139,94,75,.9);background:rgba(255,253,249,.96)}
 
 .hd__in{
@@ -140,6 +151,7 @@ p{margin:0 0 1rem}
 .hd__nav a.is-atual::after{left:0;right:60%;opacity:1}
 
 .brand{display:block;justify-self:center;line-height:0}
+.brand .logo--claro{display:none}
 .brand img{height:clamp(52px,5.6vw,68px);width:auto}
 
 .hd__acoes{
@@ -178,7 +190,10 @@ p{margin:0 0 1rem}
    ============================================================ */
 .hero{
   position:relative;overflow:hidden;isolation:isolate;
-  background:var(--peach);color:var(--marrom-esc);
+  /* a cor sai do slide ativo (data-bg no HTML), aplicada pelo JS */
+  --tema-bg:#3A231A;--tema-blob:#52301F;--tema-blob2:#6B3F27;
+  background:var(--tema-bg);color:var(--creme);
+  transition:background-color .7s ease;
   min-height:min(760px, 100svh);
   display:flex;align-items:center;
   margin-top:calc(var(--hd-h) * -1);
@@ -187,24 +202,24 @@ p{margin:0 0 1rem}
 
 /* --- formas orgânicas atrás do produto --- */
 .hero__bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.hero__blob{position:absolute;background:var(--peach-esc);opacity:.75}
+.hero__blob{position:absolute;background:var(--tema-blob);opacity:.85;transition:background-color .7s ease}
 .hero__blob--1{
   width:min(30vw,430px);aspect-ratio:1.05;right:13%;top:22%;
   border-radius:62% 38% 44% 56%/54% 62% 38% 46%;
-  background:linear-gradient(150deg,#EF9E74,#E07E52);
+  background:linear-gradient(150deg,var(--tema-blob2),var(--tema-blob));
   animation:morph 16s ease-in-out infinite;
 }
 .hero__blob--2{
   width:min(16vw,210px);aspect-ratio:1.2;right:34%;bottom:22%;
   border-radius:48% 52% 62% 38%/58% 44% 56% 42%;
-  background:linear-gradient(160deg,#F7C6A8,#EFA57F);opacity:.6;
+  background:linear-gradient(160deg,var(--tema-blob2),var(--tema-blob));opacity:.55;
   animation:morph 20s ease-in-out infinite reverse;
 }
 @keyframes morph{
   0%,100%{border-radius:62% 38% 44% 56%/54% 62% 38% 46%;rotate:0deg}
   50%{border-radius:44% 56% 58% 42%/46% 48% 52% 54%;rotate:6deg}
 }
-.hero__ring{position:absolute;border:2px solid rgba(255,253,249,.4);border-radius:50%}
+.hero__ring{position:absolute;border:2px solid rgba(255,243,233,.16);border-radius:50%}
 .hero__ring--1{width:min(38vw,540px);aspect-ratio:1;right:4%;top:12%;opacity:.7}
 .hero__ring--2{width:min(56vw,780px);aspect-ratio:1;right:-10%;top:-8%;opacity:.4}
 
@@ -220,16 +235,16 @@ p{margin:0 0 1rem}
 
 .hero__over{
   font:700 clamp(1.15rem,2vw,1.6rem)/1.1 var(--corpo);
-  color:var(--marrom-esc);margin:0 0 .35rem;
+  color:var(--peach);margin:0 0 .35rem;
 }
 .hero h1{
   font-size:clamp(2.6rem,6.2vw,5.1rem);line-height:.93;text-transform:uppercase;
   color:var(--branco);margin:0 0 .5rem;
-  text-shadow:0 6px 26px rgba(94,59,44,.22);
+  text-shadow:0 8px 30px rgba(0,0,0,.35);
 }
 .hero__tag{
   font:700 clamp(.95rem,1.5vw,1.25rem)/1 var(--corpo);letter-spacing:.22em;
-  text-transform:uppercase;color:var(--marrom-esc);margin:0;
+  text-transform:uppercase;color:rgba(255,243,233,.72);margin:0;
 }
 .hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(22px,3vw,34px)}
 
@@ -299,26 +314,26 @@ p{margin:0 0 1rem}
 }
 .hero__arrow{
   width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(94,59,44,.55);color:var(--creme);
+  background:rgba(255,243,233,.18);color:var(--creme);
   font-size:1.5rem;line-height:1;display:grid;place-items:center;
   transition:background .22s,transform .22s;
 }
-.hero__arrow:hover{background:var(--marrom-esc);transform:scale(1.08)}
+.hero__arrow:hover{background:var(--peach);color:var(--marrom-esc);transform:scale(1.08)}
 
 /* --- indicador de scroll --- */
 .hero__scroll{
   position:absolute;z-index:4;left:50%;translate:-50% 0;bottom:clamp(24px,3vw,34px);
-  width:54px;height:6px;border-radius:999px;background:rgba(94,59,44,.35);
+  width:54px;height:6px;border-radius:999px;background:rgba(255,243,233,.25);
 }
 .hero__scroll span{
-  display:block;width:22px;height:100%;border-radius:999px;background:var(--marrom-esc);
+  display:block;width:22px;height:100%;border-radius:999px;background:var(--peach);
   animation:corre 2.6s ease-in-out infinite;
 }
 @keyframes corre{0%,100%{translate:0 0}50%{translate:32px 0}}
 
 /* --- borda recortada --- */
 .hero__edge{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(40px,5vw,74px);z-index:3}
-.hero__edge path{fill:var(--creme)}
+.hero__edge path{fill:var(--marrom-esc)}
 
 /* ============ PLACEHOLDERS DE FOTO ============ */
 .shot{

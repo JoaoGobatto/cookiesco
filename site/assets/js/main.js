@@ -146,6 +146,14 @@ function heroSlider() {
   let atual = 0;
   let timer;
 
+  // cada slide traz o próprio tema de cor; o fundo da seção acompanha o cookie
+  const pintar = slide => {
+    const t = slide.dataset;
+    if (t.bg) hero.style.setProperty('--tema-bg', t.bg);
+    if (t.blob) hero.style.setProperty('--tema-blob', t.blob);
+    if (t.blob2) hero.style.setProperty('--tema-blob2', t.blob2);
+  };
+
   const ir = n => {
     atual = (n + slides.length) % slides.length;
     slides.forEach((s, i) => {
@@ -153,12 +161,17 @@ function heroSlider() {
       s.classList.toggle('is-active', ativo);
       s.setAttribute('aria-hidden', String(!ativo));
     });
+    pintar(slides[atual]);
   };
+
+  pintar(slides[0]);
 
   const rodar = () => {
     clearInterval(timer);
     if (slides.length > 1) timer = setInterval(() => ir(atual + 1), 7000);
   };
+
+  if (slides.length < 2) $('.hero__arrows', hero)?.remove();
 
   $$('.hero__arrow', hero).forEach(b => b.addEventListener('click', () => {
     ir(atual + Number(b.dataset.slide));

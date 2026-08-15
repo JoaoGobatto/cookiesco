@@ -45,7 +45,8 @@
     </nav>
 
     <a class="brand" href="#top" aria-label="Cookies &amp; Co Floripa — início">
-      <img src="assets/img/logo-marrom.webp" alt="Cookies &amp; Co Floripa" width="324" height="242">
+      <img class="logo--claro" src="assets/img/logo-claro.webp" alt="Cookies &amp; Co Floripa" width="324" height="242">
+      <img class="logo--marrom" src="assets/img/logo-marrom.webp" alt="" aria-hidden="true" width="324" height="242">
     </a>
 
     <div class="hd__acoes">
@@ -92,15 +93,20 @@
 
   <div class="wrap hero__in">
 
-    <!-- ---------- slide 1 ---------- -->
-    <article class="hero__slide is-active" role="group" aria-label="1 de 2">
+    <!-- Cada slide carrega o próprio tema. data-bg pinta o fundo da seção,
+         data-blob e data-blob2 as formas orgânicas atrás do produto. A cor sai
+         do tom dominante da massa do cookie, escurecida — ver site/README.md. -->
+
+    <!-- ---------- slide 1: chocolate ---------- -->
+    <article class="hero__slide is-active" role="group" aria-label="1 de 2"
+             data-bg="#3A231A" data-blob="#52301F" data-blob2="#6B3F27">
       <div class="hero__copy">
         <p class="hero__over">Que tal pedir</p>
         <h1>O nosso cookie<br>recheado?</h1>
         <p class="hero__tag">Delivery</p>
         <div class="hero__cta">
-          <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Pedir agora 🍪</a>
-          <a href="#cardapio" class="btn btn--outline-dark btn--lg">Ver cardápio</a>
+          <a href="#" class="btn btn--primary btn--lg" data-link="pedido">Pedir agora 🍪</a>
+          <a href="#cardapio" class="btn btn--outline-light btn--lg">Ver cardápio</a>
         </div>
       </div>
 
@@ -109,13 +115,13 @@
            Posição de cada uma: --l esquerda, --t topo, --w largura (% do palco). -->
       <div class="stage">
         <div class="stage__layer camada--inteiro" style="--l:-4%;--t:38%;--w:40%;--f:.45">
-          <img src="assets/img/hero/cookie-inteiro.webp" alt="Cookie recheado inteiro" width="857" height="888">
+          <img src="assets/img/hero/cookie-inteiro.webp" alt="Cookie de chocolate recheado inteiro" width="857" height="888">
         </div>
         <div class="stage__layer camada--chip" style="--l:14%;--t:10%;--w:6%;--f:2.6">
           <img src="assets/img/hero/chip-2.webp" alt="" width="115" height="117">
         </div>
         <div class="stage__layer camada--partido" style="--l:24%;--t:-4%;--w:76%;--f:1.15">
-          <img src="assets/img/hero/cookie-partido.webp" alt="Cookie partido ao meio com recheio de creme e doce de leite escorrendo" width="925" height="1290" fetchpriority="high">
+          <img src="assets/img/hero/cookie-partido.webp" alt="Cookie de chocolate partido ao meio, com creme e doce de leite escorrendo" width="925" height="1290" fetchpriority="high">
         </div>
         <div class="stage__layer camada--chip" style="--l:93%;--t:46%;--w:6%;--f:3.1">
           <img src="assets/img/hero/chip-3.webp" alt="" width="110" height="116">
@@ -126,26 +132,33 @@
       </div>
     </article>
 
-    <!-- ---------- slide 2 ---------- -->
-    <article class="hero__slide" role="group" aria-label="2 de 2" aria-hidden="true">
+    <!-- ---------- slide 2: red velvet ---------- -->
+    <article class="hero__slide" role="group" aria-label="2 de 2" aria-hidden="true"
+             data-bg="#4A121C" data-blob="#661923" data-blob2="#86222E">
       <div class="hero__copy">
-        <p class="hero__over">Hey cookie lovers 🧡</p>
-        <h1>Cookies que nunca<br>decepcionam</h1>
-        <p class="hero__tag">Trindade · Floripa</p>
+        <p class="hero__over">Já provou o</p>
+        <h1>Red velvet<br>recheado?</h1>
+        <p class="hero__tag">Delivery</p>
         <div class="hero__cta">
-          <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Pedir agora 🍪</a>
-          <a href="#onde" class="btn btn--outline-dark btn--lg">Onde estamos</a>
+          <a href="#" class="btn btn--primary btn--lg" data-link="pedido">Pedir agora 🍪</a>
+          <a href="#cardapio" class="btn btn--outline-light btn--lg">Ver cardápio</a>
         </div>
       </div>
       <div class="stage">
-        <div class="stage__layer camada--solo" style="--l:14%;--t:8%;--w:72%;--f:.9">
-          <img src="assets/img/hero/cookie-inteiro.webp" alt="Cookie recheado inteiro" loading="lazy" width="857" height="888">
+        <div class="stage__layer camada--inteiro" style="--l:-4%;--t:38%;--w:40%;--f:.45">
+          <img src="assets/img/hero/rv-inteiro.webp" alt="Cookie red velvet inteiro" loading="lazy" width="840" height="859">
         </div>
-        <div class="stage__layer camada--chip" style="--l:84%;--t:22%;--w:7%;--f:3">
-          <img src="assets/img/hero/chip-2.webp" alt="" loading="lazy" width="115" height="117">
+        <div class="stage__layer camada--chip" style="--l:14%;--t:10%;--w:6%;--f:2.6">
+          <img src="assets/img/hero/rv-chip-3.webp" alt="" loading="lazy" width="118" height="125">
         </div>
-        <div class="stage__layer camada--chip" style="--l:6%;--t:74%;--w:7%;--f:2.4">
-          <img src="assets/img/hero/chip-1.webp" alt="" loading="lazy" width="116" height="121">
+        <div class="stage__layer camada--partido" style="--l:24%;--t:-4%;--w:76%;--f:1.15">
+          <img src="assets/img/hero/rv-partido.webp" alt="Cookie red velvet partido ao meio com recheio escorrendo" loading="lazy" width="905" height="1257">
+        </div>
+        <div class="stage__layer camada--chip" style="--l:93%;--t:46%;--w:6%;--f:3.1">
+          <img src="assets/img/hero/rv-chip-2.webp" alt="" loading="lazy" width="119" height="128">
+        </div>
+        <div class="stage__layer camada--chip" style="--l:34%;--t:88%;--w:6.5%;--f:2.2">
+          <img src="assets/img/hero/rv-chip-1.webp" alt="" loading="lazy" width="119" height="128">
         </div>
       </div>
     </article>
