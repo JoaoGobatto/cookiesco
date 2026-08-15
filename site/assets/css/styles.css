@@ -140,13 +140,6 @@ p{margin:0 0 1rem}
 }
 .btn--pulsa:hover{animation:none}
 
-/* ============ TOPBAR ============ */
-.topbar{background:var(--marrom);color:var(--creme);font-size:.82rem}
-.topbar__in{display:flex;align-items:center;justify-content:center;gap:18px;height:38px;flex-wrap:wrap}
-.topbar__item{opacity:.92;white-space:nowrap}
-.topbar__link:hover{color:var(--peach)}
-.topbar__dot{width:4px;height:4px;border-radius:50%;background:var(--peach);opacity:.7}
-
 /* ============================================================
    HEADER — menu em caixa alta à esquerda, logo no centro, CTA à
    direita e a barra sangrando na borda, como na referência.
@@ -589,7 +582,6 @@ p{margin:0 0 1rem}
   .hd__acoes .btn{padding:11px 15px;font-size:.68rem;letter-spacing:.06em}
   body{font-size:16px}
   .btn{white-space:normal;text-align:center}
-  .topbar__in{height:auto;padding:9px 0;gap:10px;font-size:.76rem}
   .hero__cta .btn{flex:1 1 100%;justify-content:center}
   .mais__grade{grid-template-columns:1fr;max-width:340px;margin-inline:auto}
   .avals__resumo{grid-template-columns:1fr;text-align:center;gap:4px}

@@ -9,7 +9,7 @@
 **Ferramentas:**
 - Instagram [@cookiescofloripa](https://instagram.com/cookiescofloripa) — ~13,7 mil seguidores, principal canal de aquisição
 - Perfil no Google: https://share.google/syQp1B6EHSXhLBuX3 (nota e total de avaliações ainda a levantar)
-- Cardápio online próprio com busca, categorias, carrinho, checkout, WhatsApp e cashback de 6%
+- Cardápio online: https://cardapio.ai/online/cookiescofloripa — busca, categorias, carrinho, checkout, WhatsApp e cashback de 6%
 - WhatsApp: (48) 98834-0265
 
 **Além do cookie (confirmado pelo dono em ago/2026):** chocolate quente cremoso, fondue de

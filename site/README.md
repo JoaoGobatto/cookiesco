@@ -42,7 +42,6 @@ A **estrutura** segue o site de referência da Grill Burger:
 
 | Grill Burger | Aqui |
 |---|---|
-| topbar com contato | topbar com horário, bairro e WhatsApp |
 | header com logo central + CTA | header com logo central + `PEDIR ONLINE` e barra sangrada |
 | hero: slider, produto explodido, setas, borda recortada | mesma composição, com o cookie em camadas e fundo por sabor |
 | menu com quatro cartões de categoria | "Muito mais que cookies", quatro cartões de produto |
@@ -58,15 +57,14 @@ detalhes manuscritos. Nada de preto predominante nem dourado.
 
 ```js
 const CONFIG = {
-  linkPedido: '',   // ← cola aqui a URL do cardápio online
+  linkPedido: 'https://cardapio.ai/online/cookiescofloripa',
   whatsapp: '5548988340265',
   linkMapa: ''      // ← só depois de confirmar o endereço
 };
 ```
 
-Enquanto `linkPedido` estiver vazio, todos os botões `PEDIR AGORA` ficam inertes
-(não levam a lugar nenhum e não quebram). Assim que preencher, os 7 botões da
-página passam a apontar pro sistema de uma vez.
+Os 7 botões de pedido da página saem daí. Se o endereço mudar, muda numa linha só.
+Enquanto o campo estiver vazio, os botões ficam inertes em vez de quebrar.
 
 **2. As fotos.** Toda foto que falta aparece como um bloco peach escrito
 `FOTO: <nome>`. É só salvar o arquivo com o nome certo em `assets/img/` que ele

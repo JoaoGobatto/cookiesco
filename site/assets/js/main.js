@@ -7,7 +7,7 @@
 const CONFIG = {
   // URL do sistema de pedidos que já existe (carrinho, checkout, cashback).
   // Enquanto estiver vazio, os botões PEDIR AGORA não levam a lugar nenhum.
-  linkPedido: '',
+  linkPedido: 'https://cardapio.ai/online/cookiescofloripa',
 
   // WhatsApp da loja, só números, com DDI+DDD.
   whatsapp: '5548988340265',
