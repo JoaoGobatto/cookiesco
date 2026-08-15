@@ -116,7 +116,7 @@ escurece pra ficar entre 15% e 25% de luminosidade. Foi assim que saíram:
 | Slide | Massa | Fundo | Blobs |
 |---|---|---|---|
 | chocolate | `#2F1C16` | `#3A231A` | `#52301F` / `#6B3F27` |
-| red velvet | `#74131A` | `#4E1217` | `#6D181E` / `#8C1D25` |
+| Red Ninho | `#74131A` | `#4E1217` | `#6D181E` / `#8C1D25` |
 
 Não usar preto puro — o design-guide proíbe, e cookie escuro sobre fundo escuro
 demais some. O chocolate ficou num cacau bem escuro, não em preto.
@@ -132,9 +132,9 @@ Camadas em `assets/img/hero/`, recortadas das fotos em `identidade/fotos/`:
 
 | Arquivo | Camada | Comportamento |
 |---|---|---|
-| `cookie-partido.webp` / `rv-partido.webp` | cookie partido, recheio escorrendo | protagonista, cresce no hover |
-| `cookie-inteiro.webp` / `rv-inteiro.webp` | cookie inteiro | fica atrás, recua e inclina no hover |
-| `chip-*.webp` / `rv-chip-*.webp` | gotas de chocolate soltas | flutuam e se espalham no hover |
+| `cookie-partido.webp` / `ninho-partido.webp` | cookie partido, recheio escorrendo | protagonista, cresce no hover |
+| `cookie-inteiro.webp` / `ninho-inteiro.webp` | cookie inteiro | fica atrás, recua e inclina no hover |
+| `chip-*.webp` / `ninho-chip-*.webp` | gotas de chocolate soltas | flutuam e se espalham no hover |
 
 **Como reposicionar sem mexer em CSS.** Cada camada carrega a própria posição no
 `style`, em porcentagem do palco:
@@ -152,7 +152,7 @@ Camadas em `assets/img/hero/`, recortadas das fotos em `identidade/fotos/`:
 **O fundo da foto decide o trabalho todo.** Vale a pena ler isso antes da próxima
 sessão de fotos.
 
-*Fundo frio (azul-acinzentado) — o caminho fácil.* O red velvet foi refotografado
+*Fundo frio (azul-acinzentado) — o caminho fácil.* O Red Ninho foi refotografado
 assim, e o recorte virou uma linha de código: cookie, creme e gotas são quentes
 (vermelho menos azul entre +40 e +73), fundo e bancada são frios (entre −33 e −12).
 Um corte em `R − B > 12` separa tudo de uma vez, sem tocar em borda, sombra ou
@@ -161,7 +161,7 @@ aqueles que na foto deixam ver o fundo através — reabre o que for francamente
 e eles voltam a ser transparentes.
 
 *Fundo quente (terracota) — o caminho difícil.* Foi o caso do cookie de chocolate e
-da primeira foto do red velvet. Aí o fundo tem cor parecida com o produto e o
+da primeira foto do Red Ninho. Aí o fundo tem cor parecida com o produto e o
 recorte precisa de detecção de borda (o fundo é liso, o cookie tem contorno duro),
 mais três remendos:
 
@@ -174,7 +174,7 @@ mais três remendos:
    peach, evidentes agora que é escuro. Saem por crescimento a partir de sementes que
    batem com o fundo estimado localmente.
 
-E na primeira foto do red velvet ainda teve um quarto problema: creme (215,160,129)
+E na primeira foto do Red Ninho ainda teve um quarto problema: creme (215,160,129)
 e fundo (223,147,121) com praticamente o mesmo RGB. A borda entre os dois some e o
 preenchimento come o recheio. Deu pra resolver pelo brilho — o creme é ~30 mais
 claro que o fundo naquele ponto — mas o resultado nunca ficou tão limpo quanto o da
@@ -277,7 +277,7 @@ Por isso o `index.html` chama os arquivos assim:
 
 ```html
 <link rel="stylesheet" href="assets/css/styles.css?v=3">
-<img src="assets/img/hero/rv-partido.webp?v=3" ...>
+<img src="assets/img/hero/ninho-partido.webp?v=3" ...>
 ```
 
 Endereço diferente, entrada nova no cache, download novo — mesmo em navegador
