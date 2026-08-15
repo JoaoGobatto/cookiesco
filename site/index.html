@@ -66,42 +66,100 @@
 
 <main id="top">
 
-<!-- ============ HERO ============ -->
-<section class="hero">
+<!-- ============================================================
+     HERO — espelha o slider da referência (grillburger.com.br):
+     fundo chapado full-bleed, blobs orgânicos atrás do produto,
+     headline gigante em caixa alta à esquerda, produto explodido
+     à direita, setas de navegação e borda recortada embaixo.
+     O palco do produto (.stage) é o espaço reservado pro cookie
+     interativo — ver site/README.md, seção "O cookie do hero".
+     ============================================================ -->
+<section class="hero" id="hero" aria-roledescription="carrossel" aria-label="Destaques">
   <div class="hero__bg" aria-hidden="true">
-    <span class="blob blob--1"></span>
-    <span class="blob blob--2"></span>
-    <svg class="sprinkle sprinkle--a" viewBox="0 0 40 12"><rect width="40" height="12" rx="6"/></svg>
-    <svg class="sprinkle sprinkle--b" viewBox="0 0 40 12"><rect width="40" height="12" rx="6"/></svg>
-    <svg class="sprinkle sprinkle--c" viewBox="0 0 40 12"><rect width="40" height="12" rx="6"/></svg>
-    <svg class="sprinkle sprinkle--d" viewBox="0 0 40 12"><rect width="40" height="12" rx="6"/></svg>
+    <span class="hero__blob hero__blob--1"></span>
+    <span class="hero__blob hero__blob--2"></span>
+    <span class="hero__ring hero__ring--1"></span>
+    <span class="hero__ring hero__ring--2"></span>
   </div>
 
   <div class="wrap hero__in">
-    <div class="hero__copy">
-      <p class="hand reveal" style="--d:0ms">hey cookie lovers 🧡</p>
-      <h1 class="reveal" style="--d:80ms">Cookies que<br>nunca<br><span class="hl">decepcionam.</span></h1>
-      <p class="lead reveal" style="--d:180ms">Grandes, recheados até a borda e servidos quentinhos.
-        Come aqui, leva pra casa ou pede no delivery.</p>
-      <div class="hero__cta reveal" style="--d:260ms">
-        <a href="#" class="btn btn--primary btn--lg" data-link="pedido">Pedir agora 🍪</a>
-        <a href="#cardapio" class="btn btn--ghost btn--lg">Ver cardápio</a>
-      </div>
-    </div>
 
-    <figure class="hero__shot reveal" style="--d:200ms">
-      <div class="shot shot--round" data-shot="hero">
-        <img src="assets/img/hero-cookie.jpg" alt="Cookie recheado partido ao meio com o recheio escorrendo">
+    <!-- ---------- slide 1 ---------- -->
+    <article class="hero__slide is-active" role="group" aria-label="1 de 3">
+      <div class="hero__copy">
+        <p class="hero__over">Que tal pedir</p>
+        <h1>O nosso cookie<br>de pudim?</h1>
+        <p class="hero__tag">Delivery</p>
+        <div class="hero__cta">
+          <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Pedir agora 🍪</a>
+          <a href="#cardapio" class="btn btn--outline-dark btn--lg">Ver cardápio</a>
+        </div>
       </div>
-      <span class="badge-round" aria-hidden="true">
-        <svg viewBox="0 0 100 100">
-          <defs><path id="circ" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
-          <text><textPath href="#circ">quentinho • recheado • quentinho • recheado •</textPath></text>
-        </svg>
-        <b>🔥</b>
-      </span>
-    </figure>
+
+      <!-- palco do cookie interativo: cada camada é um PNG com fundo transparente -->
+      <div class="stage" data-stage="camadas">
+        <div class="stage__layer" data-layer="1" data-nome="metade de cima">
+          <img src="assets/img/hero/cookie-topo.png" alt="">
+        </div>
+        <div class="stage__layer" data-layer="2" data-nome="recheio">
+          <img src="assets/img/hero/cookie-recheio.png" alt="">
+        </div>
+        <div class="stage__layer" data-layer="3" data-nome="metade de baixo">
+          <img src="assets/img/hero/cookie-base.png" alt="Cookie de pudim partido ao meio, com o recheio à mostra">
+        </div>
+        <div class="stage__layer stage__layer--solto" data-layer="4" data-nome="pedaços">
+          <img src="assets/img/hero/cookie-pedacos.png" alt="">
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- slide 2 ---------- -->
+    <article class="hero__slide" role="group" aria-label="2 de 3" aria-hidden="true">
+      <div class="hero__copy">
+        <p class="hero__over">Quente ou gelado?</p>
+        <h1>Fondue de<br>cookie red velvet</h1>
+        <p class="hero__tag">Novidade</p>
+        <div class="hero__cta">
+          <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Eu quero 🍫</a>
+          <a href="#fondue" class="btn btn--outline-dark btn--lg">Saber mais</a>
+        </div>
+      </div>
+      <div class="stage" data-stage="unico">
+        <div class="stage__layer" data-layer="3" data-nome="fondue">
+          <img src="assets/img/hero/fondue.png" alt="Fondue de cookie Red Velvet">
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- slide 3 ---------- -->
+    <article class="hero__slide" role="group" aria-label="3 de 3" aria-hidden="true">
+      <div class="hero__copy">
+        <p class="hero__over">Hey cookie lovers 🧡</p>
+        <h1>Cookies que nunca<br>decepcionam</h1>
+        <p class="hero__tag">Trindade · Floripa</p>
+        <div class="hero__cta">
+          <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Pedir agora 🍪</a>
+          <a href="#onde" class="btn btn--outline-dark btn--lg">Onde estamos</a>
+        </div>
+      </div>
+      <div class="stage" data-stage="unico">
+        <div class="stage__layer" data-layer="3" data-nome="cookie com sorvete">
+          <img src="assets/img/hero/cookie-sorvete.png" alt="Cookie quente com bola de sorvete">
+        </div>
+      </div>
+    </article>
   </div>
+
+  <div class="hero__arrows">
+    <button class="hero__arrow" data-slide="-1" aria-label="Destaque anterior">‹</button>
+    <button class="hero__arrow" data-slide="1" aria-label="Próximo destaque">›</button>
+  </div>
+
+  <a class="hero__scroll" href="#destaque" aria-label="Rolar para o conteúdo"><span></span></a>
+
+  <svg class="hero__edge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,60 L0,34 C120,52 220,18 340,26 C470,35 520,8 640,14 C780,21 830,46 960,40 C1090,34 1150,10 1270,18 C1350,23 1400,38 1440,30 L1440,60 Z"/>
+  </svg>
 </section>
 
 <!-- ============ BARRA DE INFO ============ -->

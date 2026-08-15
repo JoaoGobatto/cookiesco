@@ -120,10 +120,75 @@ function montarCardapio() {
 
 /* --- placeholder quando a foto ainda não existe --- */
 function tratarFotos() {
-  $$('.shot img').forEach(img => {
-    const marcar = () => img.closest('.shot').classList.add('is-missing');
+  $$('.shot img, .stage__layer img').forEach(img => {
+    const alvo = img.closest('.shot, .stage__layer');
+    const marcar = () => alvo.classList.add('is-missing');
     if (img.complete && img.naturalWidth === 0) marcar();
     img.addEventListener('error', marcar);
+  });
+}
+
+/* --- se o palco já tem alguma imagem real, esconde os fantasmas das que faltam --- */
+function limparFantasmas() {
+  $$('.stage').forEach(stage => {
+    const camadas = $$('.stage__layer', stage);
+    const temReal = camadas.some(l => !l.classList.contains('is-missing'));
+    if (temReal) camadas.filter(l => l.classList.contains('is-missing')).forEach(l => l.remove());
+  });
+}
+
+/* --- hero: slider + cookie que reage ao mouse --- */
+function heroSlider() {
+  const hero = $('#hero');
+  if (!hero) return;
+
+  const slides = $$('.hero__slide', hero);
+  let atual = 0;
+  let timer;
+
+  const ir = n => {
+    atual = (n + slides.length) % slides.length;
+    slides.forEach((s, i) => {
+      const ativo = i === atual;
+      s.classList.toggle('is-active', ativo);
+      s.setAttribute('aria-hidden', String(!ativo));
+    });
+  };
+
+  const rodar = () => {
+    clearInterval(timer);
+    if (slides.length > 1) timer = setInterval(() => ir(atual + 1), 7000);
+  };
+
+  $$('.hero__arrow', hero).forEach(b => b.addEventListener('click', () => {
+    ir(atual + Number(b.dataset.slide));
+    rodar();
+  }));
+
+  hero.addEventListener('mouseenter', () => clearInterval(timer));
+  hero.addEventListener('mouseleave', rodar);
+  hero.addEventListener('focusin', () => clearInterval(timer));
+  rodar();
+
+  // parallax: cada camada do cookie acompanha o mouse num ritmo diferente
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover)').matches) return;
+
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect();
+    const px = ((e.clientX - r.left) / r.width - .5) * 26;
+    const py = ((e.clientY - r.top) / r.height - .5) * 20;
+    $$('.hero__slide.is-active .stage__layer', hero).forEach(l => {
+      l.style.setProperty('--px', `${px}px`);
+      l.style.setProperty('--py', `${py}px`);
+    });
+  });
+
+  hero.addEventListener('pointerleave', () => {
+    $$('.stage__layer', hero).forEach(l => {
+      l.style.removeProperty('--px');
+      l.style.removeProperty('--py');
+    });
   });
 }
 
@@ -175,7 +240,11 @@ document.addEventListener('DOMContentLoaded', () => {
   montarCardapio();
   tratarFotos();
   header();
+  heroSlider();
   revelarNoScroll();
   const ano = $('#ano');
   if (ano) ano.textContent = new Date().getFullYear();
 });
+
+// os erros de imagem só chegam depois do load
+window.addEventListener('load', limparFantasmas);

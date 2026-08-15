@@ -59,7 +59,8 @@ página passam a apontar pro sistema de uma vez.
 
 **2. As fotos.** Toda foto que falta aparece como um bloco peach escrito
 `FOTO: <nome>`. É só salvar o arquivo com o nome certo em `assets/img/` que ele
-entra sozinho — não precisa mexer no HTML.
+entra sozinho — não precisa mexer no HTML. O hero tem regras próprias: veja
+**O cookie do hero**, mais abaixo.
 
 | Arquivo | O que é |
 |---|---|
@@ -82,6 +83,68 @@ Formato: JPG ou WebP, largura de uns 1200px nas grandes e 800px nas quadradas.
 
 `preco: null` faz o item aparecer sem preço — é como está agora, porque os valores
 ainda não foram confirmados. `tag` é opcional (o selinho verde).
+
+## O cookie do hero
+
+A seção 1 copia a composição do slider da referência: fundo chapado, headline em
+caixa alta, produto explodido à direita sobre as formas orgânicas. O espaço do
+produto (`.stage` no HTML) já está reservado e animado — hoje mostra a pilha
+tracejada com o nome de cada camada.
+
+O produto é montado em **camadas separadas**, igual ao hambúrguer desmontado da
+referência. Cada camada é um PNG com fundo transparente em `assets/img/hero/`:
+
+| Arquivo | Camada | Como aparece |
+|---|---|---|
+| `cookie-topo.png` | metade de cima do cookie | sobe e inclina no hover |
+| `cookie-recheio.png` | o recheio / fio escorrendo | fica no meio, quase parado |
+| `cookie-base.png` | metade de baixo | desce no hover |
+| `cookie-pedacos.png` | migalhas e pedaços de chocolate | flutua solto no canto |
+| `fondue.png` | slide 2 | imagem única, sem camadas |
+| `cookie-sorvete.png` | slide 3 | imagem única, sem camadas |
+
+**Especificação:** PNG com canal alpha, quadrado, 1600×1600 no mínimo, produto
+ocupando ~85% do quadro, **sem sombra embutida no arquivo** (o CSS já aplica a
+sombra). Cada camada precisa estar na mesma moldura das outras — se você recortar
+as três metades da mesma foto sem mudar o enquadramento, elas encaixam sozinhas.
+
+**Se você tiver só uma imagem:** salva como `cookie-base.png` e pronto. O site
+detecta que as outras camadas não existem, remove os fantasmas e mostra a imagem
+única (perde o efeito de explodir, mantém o parallax).
+
+### Como produzir
+
+**Caminho recomendado — foto real + Gemini pra recortar.** O produto é de comer;
+cookie gerado por IA no hero é propaganda de um produto que não existe. Fotografe:
+
+- cookie partido ao meio, as duas metades ligeiramente separadas, recheio esticando
+- fundo liso e claro (parede branca, papel), luz natural pela lateral, sem flash
+- câmera na altura do cookie, não de cima
+- três disparos do mesmo ponto, sem mexer no tripé/celular: (1) as duas metades
+  juntas, (2) só a metade de cima, (3) só a metade de baixo
+
+Depois, no Gemini, uma imagem por vez:
+
+> Remova o fundo desta foto e devolva um PNG com fundo transparente. Preserve as
+> bordas do cookie e os fios de recheio, sem halo branco em volta. Não altere cor,
+> textura nem enquadramento.
+
+**Enquanto a foto real não vem — placeholder de IA.** Serve pra fechar o layout,
+mas troca antes de publicar:
+
+> Fotografia macro de um cookie artesanal grande partido ao meio, recheio cremoso
+> branco escorrendo entre as duas metades, massa amanteigada com pedaços de
+> chocolate, luz natural suave vinda da lateral, produto centralizado ocupando quase
+> todo o quadro, fundo totalmente transparente (PNG com canal alpha), sem sombra no
+> fundo, altíssima resolução, estética de fotografia gastronômica editorial.
+
+Trocando "partido ao meio" por "metade de cima de um cookie, vista de frente" e
+"metade de baixo de um cookie com recheio à mostra" você tira as outras camadas.
+
+**Sobre vídeo (Flow):** não vale pro hero. Vídeo com fundo transparente depende de
+WebM/alpha, que o Safari não toca — o cookie apareceria numa caixa preta no iPhone,
+que é metade do público. O Flow rende muito melhor num loop curto na seção do
+fondue (chocolate escorrendo) ou direto no Instagram, e aí é MP4 normal.
 
 ## O que está pendente de confirmação com a loja
 
