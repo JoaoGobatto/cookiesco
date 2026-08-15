@@ -17,25 +17,35 @@ site/
 └── README.md
 ```
 
+## Estado atual — em construção, seção por seção
+
+A página tem hoje **header, hero e avaliações**, mais topbar e rodapé. As outras
+seções (destaque de produto, anatomia do cookie, cardápio, fondue, delivery,
+motivos, galeria, Instagram, localização) foram removidas de propósito para serem
+refeitas uma de cada vez, com mais cuidado.
+
+Elas não se perderam: estão no histórico do git, no commit anterior à remoção. Para
+consultar o que existia:
+
+```bash
+git log --oneline -- site/index.html
+git show <commit>:site/index.html
+```
+
+A navegação do topo só aponta para o que existe. Cada seção que voltar ganha o link
+de novo. As fotos listadas mais abaixo (galeria, Instagram, mapa) só voltam a ser
+usadas quando as seções delas voltarem.
+
 ## De onde vem cada decisão
 
-A **estrutura** segue o site de referência da Grill Burger, seção por seção:
+A **estrutura** segue o site de referência da Grill Burger:
 
 | Grill Burger | Aqui |
 |---|---|
 | topbar com contato | topbar com horário, bairro e WhatsApp |
-| header com logo central + CTA vermelho | header com logo central + `PEDIR AGORA 🍪` |
-| hero: slider, produto explodido, setas, borda recortada | mesma composição, com o cookie em camadas |
-| "Tá na dúvida? Pede logo o BLACK!!!" | "Tá na dúvida? Pede logo o de Pudim." |
-| ingredientes ao redor do burger | anatomia ao redor do cookie |
-| menu com abas e preços | cardápio com abas por categoria |
-| delivery com desconto | delivery com os 6% de cashback |
-| "Estamos no Ifood" | "Quente ou gelado? Os dois." (fondue e sorvete) |
-| depoimentos em banda escura | avaliações em banda marrom |
-| galeria "Fotos reais" | galeria "Fotos reais" |
-| blog | "Feito pra ser recheado" (4 motivos) |
-| feed do Instagram | feed do Instagram |
-| footer com unidade e horário | footer com bairro, horário e assinatura |
+| header com logo central + CTA | header com logo central + `PEDIR ONLINE` e barra sangrada |
+| hero: slider, produto explodido, setas, borda recortada | mesma composição, com o cookie em camadas e fundo por sabor |
+| depoimentos | avaliações do Google com resumo e carrossel |
 
 A **pele** é toda da Cookies & Co, de `identidade/design-guide.md`: peach `#F6B093`,
 creme `#FFF3E9`, marrom `#8B5E4B`, Baloo 2 nos títulos, DM Sans no corpo, Caveat nos
@@ -204,6 +214,53 @@ O Flow rende melhor num loop na seção do fondue ou direto no Instagram, em MP4
 2. Duplica um `<article class="hero__slide">` no `index.html`, troca texto, imagens
    e as três cores do tema.
 3. Só isso — o slider conta os slides sozinho e some com as setas se sobrar um só.
+
+## Avaliações
+
+A seção tem duas partes: o resumo à esquerda e o carrossel de cards à direita. Tudo
+sai de `assets/js/main.js`.
+
+**O resumo** troca de cara sozinho. Enquanto `RESUMO` estiver com `null`, ele mostra
+o título de marca ("Quem já provou / Amou"). Assim que a nota e o total forem
+preenchidos, vira o placar com estrelas, igual aos widgets de avaliação:
+
+```js
+const RESUMO = { nota: 4.9, total: 148 };
+```
+
+A palavra do topo (Excelente / Muito bom / Bom) é calculada da nota, não escrita à mão.
+
+**Os cards** vêm da lista `AVALIACOES`:
+
+```js
+{ nome: 'André Cisne', quando: '2 anos atrás', nota: 5, texto: 'Delicioso o lanche...' }
+```
+
+`nome` e `quando` com `null` viram "Cliente no Google" e some a data — é o estado de
+hoje, porque as três avaliações que estão lá vieram de material público sem o nome
+completo do autor. O avatar é a inicial do nome num círculo colorido, o mesmo recurso
+que o Google usa para quem não tem foto.
+
+Texto comprido é cortado em 4 linhas com um "Ler mais" — que só aparece quando o texto
+realmente foi cortado, não em todo card.
+
+**Nada de avaliação inventada.** Se um texto não veio de um cliente de verdade, não
+entra. É propaganda enganosa e, além disso, some com a credibilidade da seção inteira,
+que é justamente o que ela existe pra construir.
+
+### Como manter atualizado
+
+Três caminhos, do mais simples ao mais automático:
+
+1. **Manual (o de agora).** Você copia as avaliações do perfil do Google e cola na
+   lista. Controle total do visual, zero dependência externa, mas não atualiza sozinho.
+2. **Widget pronto** (Trustindex, Elfsight, EmbedSocial). É de onde veio o layout que
+   serviu de referência. Atualiza sozinho e mostra a nota real, mas entra como script
+   de terceiro: pesa no carregamento, traz o visual deles e o plano gratuito costuma
+   ter marca d'água.
+3. **Google Places API.** Oficial, devolve as 5 avaliações mais recentes. Precisa de
+   chave, e a chave não pode ficar exposta no HTML — pede uma função serverless
+   (a Vercel faz isso numa pasta `api/`). Atualiza sozinho e sem script de terceiro.
 
 ## Botões de pedido
 

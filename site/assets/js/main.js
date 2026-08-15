@@ -15,8 +15,44 @@ const CONFIG = {
 
   // Link do Google Maps. Preencher só depois de confirmar o endereço com a loja
   // (há divergência entre plataformas — ver _memoria/empresa.md).
-  linkMapa: ''
+  linkMapa: '',
+
+  // Página de avaliações no Google (o "Ver todas no Google").
+  linkGoogle: ''
 };
+
+/* ------------------------------------------------------------
+   AVALIAÇÕES
+   Números do topo: pegar no perfil do Google da loja. Deixe null
+   pra esconder o bloco de resumo enquanto não tiver o dado certo.
+   ------------------------------------------------------------ */
+const RESUMO = {
+  nota: null,      // ex: 4.9
+  total: null      // ex: 148
+};
+
+/* Uma entrada por avaliação. Só texto real de cliente — nada inventado.
+   nome, quando e nota saem do próprio card do Google. */
+const AVALIACOES = [
+  {
+    nome: null,
+    quando: null,
+    nota: 5,
+    texto: 'Uma das melhores cookies que já comemos.'
+  },
+  {
+    nome: null,
+    quando: null,
+    nota: 5,
+    texto: 'Atendimento maravilhoso.'
+  },
+  {
+    nome: null,
+    quando: null,
+    nota: 5,
+    texto: 'O fondue de cookie Red Velvet chamou atenção — e o cookie chegou quentinho.'
+  }
+];
 
 /* ------------------------------------------------------------
    CARDÁPIO
@@ -65,7 +101,7 @@ function aplicarLinks() {
   const zap = CONFIG.whatsapp
     ? `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappMsg)}`
     : '';
-  const destinos = { pedido: CONFIG.linkPedido, whatsapp: zap, mapa: CONFIG.linkMapa };
+  const destinos = { pedido: CONFIG.linkPedido, whatsapp: zap, mapa: CONFIG.linkMapa, google: CONFIG.linkGoogle };
 
   $$('[data-link]').forEach(a => {
     const url = destinos[a.dataset.link];
@@ -116,6 +152,96 @@ function montarCardapio() {
   });
 
   render(0);
+}
+
+/* --- avaliações: resumo + carrossel --- */
+function montarAvaliacoes() {
+  const trilho = $('#avals-trilho');
+  if (!trilho) return;
+  const sec = trilho.closest('.avals');
+
+  const escapa = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  const estrelas = n => {
+    let h = '';
+    for (let i = 1; i <= 5; i++) h += `<i class="${n >= i ? 'cheia' : n >= i - .5 ? 'meia' : ''}"></i>`;
+    return h;
+  };
+
+  const palavra = n => (n >= 4.8 ? 'Excelente' : n >= 4 ? 'Muito bom' : n >= 3 ? 'Bom' : '');
+
+  // ----- resumo: placar do Google, ou título de seção enquanto não houver nota -----
+  const temNota = RESUMO.nota != null && RESUMO.total != null;
+  $('[data-titulo]', sec).hidden = temNota;
+  $('[data-placar]', sec).hidden = !temNota;
+  if (temNota) {
+    $('[data-selo]', sec).textContent = palavra(RESUMO.nota);
+    $('[data-nota]', sec).textContent = RESUMO.nota.toFixed(1).replace('.', ',');
+    $('[data-estrelas]', sec).innerHTML = estrelas(RESUMO.nota);
+    $('[data-total]', sec).textContent = RESUMO.total.toLocaleString('pt-BR');
+  }
+
+  // ----- cards -----
+  const cores = ['#8B5E4B', '#A8B89D', '#E8946F', '#5E3B2C', '#C98B6B'];
+  const inicial = nome => (nome ? nome.trim()[0].toUpperCase() : '★');
+
+  trilho.innerHTML = AVALIACOES.map((a, i) => `
+    <article class="aval" role="listitem">
+      <div class="aval__topo">
+        <span class="aval__avatar" style="background:${cores[i % cores.length]}" aria-hidden="true">${inicial(a.nome)}</span>
+        <span class="aval__quem">
+          <span class="aval__nome">${a.nome ? escapa(a.nome) : 'Cliente no Google'}</span>
+          ${a.quando ? `<span class="aval__quando">${escapa(a.quando)}</span>` : ''}
+        </span>
+        <svg class="aval__g" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.8 2.6 13.6l7.8 6.1C12.3 13.9 17.6 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.2-.4-4.7H24v9h12.7c-.5 3-2.2 5.5-4.7 7.2l7.6 5.9c4.4-4.1 6.9-10.1 6.9-17.4z"/>
+          <path fill="#FBBC05" d="M10.4 28.3c-.5-1.5-.8-3.1-.8-4.8s.3-3.3.8-4.8l-7.8-6.1C.9 15.9 0 19.8 0 23.5s.9 7.6 2.6 10.9l7.8-6.1z"/>
+          <path fill="#34A853" d="M24 47.5c6.2 0 11.5-2.1 15.3-5.6l-7.6-5.9c-2.1 1.4-4.8 2.3-7.7 2.3-6.4 0-11.7-4.4-13.6-10.2l-7.8 6.1C6.5 42.2 14.6 47.5 24 47.5z"/>
+        </svg>
+      </div>
+      <div class="aval__linha">
+        <span class="estrelas" aria-label="${a.nota} de 5 estrelas">${estrelas(a.nota)}</span>
+        <svg class="aval__ok" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l2.4 1.8 3-.3 1 2.8 2.6 1.5-1 2.9 1 2.9-2.6 1.5-1 2.8-3-.3L12 22l-2.4-1.8-3 .3-1-2.8L3 16.2l1-2.9-1-2.9 2.6-1.5 1-2.8 3 .3L12 2zm-1.2 13.5l5.3-5.3-1.4-1.4-3.9 3.9-1.8-1.8L7.6 12l3.2 3.5z"/>
+        </svg>
+      </div>
+      <p class="aval__txt">${escapa(a.texto)}</p>
+    </article>`).join('');
+
+  // "ler mais" só onde o texto realmente foi cortado
+  $$('.aval', trilho).forEach(card => {
+    const txt = $('.aval__txt', card);
+    if (txt.scrollHeight - txt.clientHeight < 4) return;
+    const b = document.createElement('button');
+    b.className = 'aval__mais';
+    b.type = 'button';
+    b.textContent = 'Ler mais';
+    b.addEventListener('click', () => {
+      const aberta = card.classList.toggle('is-aberta');
+      b.textContent = aberta ? 'Ler menos' : 'Ler mais';
+    });
+    card.appendChild(b);
+  });
+
+  // ----- setas -----
+  const setas = $$('.avals__seta', sec);
+  const passo = () => {
+    const card = $('.aval', trilho);
+    return card ? card.getBoundingClientRect().width + 18 : 300;
+  };
+  setas.forEach(b => b.addEventListener('click', () => {
+    trilho.scrollBy({ left: passo() * Number(b.dataset.avals), behavior: 'smooth' });
+  }));
+
+  const atualizarSetas = () => {
+    const fim = trilho.scrollWidth - trilho.clientWidth;
+    setas[0].disabled = trilho.scrollLeft < 8;
+    setas[1].disabled = trilho.scrollLeft > fim - 8;
+  };
+  trilho.addEventListener('scroll', atualizarSetas, { passive: true });
+  window.addEventListener('resize', atualizarSetas);
+  atualizarSetas();
 }
 
 /* --- placeholder quando a foto ainda não existe --- */
@@ -251,6 +377,7 @@ function revelarNoScroll() {
 document.addEventListener('DOMContentLoaded', () => {
   aplicarLinks();
   montarCardapio();
+  montarAvaliacoes();
   tratarFotos();
   header();
   heroSlider();
