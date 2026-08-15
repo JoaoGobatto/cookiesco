@@ -236,11 +236,35 @@ por algum motivo o deploy continuar dando 404, dá pra forçar pelo painel:
 redeploy. Uma coisa OU a outra, não as duas (com Root Directory em `site` o
 `vercel.json` da raiz deixa de ser lido).
 
+Tem uma cópia do mesmo arquivo em `site/vercel.json`, sem o `outputDirectory`.
+Isso cobre os dois jeitos de configurar: se o Root Directory do projeto for a raiz,
+vale o da raiz; se for `site`, vale o de dentro. Assim os cabeçalhos se aplicam de
+qualquer forma.
+
 O `.vercelignore` deixa de fora `Ref/`, `templates/`, `_memoria/` e companhia —
 só a pasta do site sobe. Sem isso cada deploy carregaria os 19 MB da pasta de
 referência à toa.
 
 Não tem build: é HTML estático. Cada push no branch dispara um deploy novo.
+
+### Cache — por que está curto de propósito
+
+Os arquivos do site reaproveitam o mesmo nome a cada alteração: `styles.css`,
+`cookie-partido.webp` e companhia mudam de conteúdo mas não de endereço. Com cache
+longo, quem já visitou continua vendo a versão velha por dias, mesmo depois do
+deploy — foi exatamente o que aconteceu na primeira configuração, que tinha 7 dias
+para imagens e 1 hora para CSS.
+
+Agora tudo vai com `max-age=0, must-revalidate`: o navegador guarda a cópia, mas
+pergunta ao servidor a cada visita e só rebaixa se mudou (responde 304, alguns bytes).
+Para um site desse tamanho o custo é irrelevante e nunca mais serve página velha.
+
+A exceção são as fontes, cujos nomes já carregam hash do conteúdo — essas ficam com
+cache de um ano.
+
+Quando o site estabilizar, dá pra voltar ao cache longo em imagens, mas aí colocando
+hash no nome dos arquivos (`cookie-partido.a1b2c3.webp`), que é o jeito certo de ter
+cache eterno sem ficar preso na versão velha.
 
 ## Detalhes técnicos
 
