@@ -359,6 +359,19 @@ function heroSlider() {
   });
 }
 
+/* --- botão fixo do mobile: só depois que o hero sai de vista ---
+   No topo ele ficava colado no CTA do próprio hero, dois botões iguais empilhados. */
+function botaoFixo() {
+  const fab = $('.fab');
+  const hero = $('#hero');
+  if (!fab || !hero || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(
+    ([e]) => fab.classList.toggle('is-fora', e.isIntersecting),
+    { threshold: 0, rootMargin: '-70% 0px 0px 0px' }
+  );
+  io.observe(hero);
+}
+
 /* --- header sticky + menu mobile --- */
 function header() {
   const hd = $('#hd');
@@ -408,6 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
   montarAvaliacoes();
   tratarFotos();
   header();
+  botaoFixo();
   heroSlider();
   revelarNoScroll();
   const ano = $('#ano');

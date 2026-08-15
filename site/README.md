@@ -124,6 +124,7 @@ escurece pra ficar entre 15% e 25% de luminosidade. Foi assim que saíram:
 
 | Slide | Massa | Fundo | Blobs |
 |---|---|---|---|
+| Napolitano (agosto) | `#461C15` | `#442230` | `#5E2C40` / `#7B3753` |
 | chocolate | `#2F1C16` | `#3A231A` | `#52301F` / `#6B3F27` |
 | Red Ninho | `#74131A` | `#4E1217` | `#6D181E` / `#8C1D25` |
 
