@@ -2,15 +2,19 @@
 
 ## Agora
 
-- [ ] **Site da loja** — construir seguindo de perto a referência do site de hambúrguer
-      que o dono vai enviar, trocando conteúdo, cores e linguagem pela realidade da
-      Cookies & Co (ver `_memoria/estrategia.md` e `identidade/design-guide.md`)
+- [x] **Site da loja** — primeira versão pronta em `site/`, seguindo a estrutura da
+      referência (Grill Burger) com a pele da Cookies & Co
+- [ ] Aprovar os textos do site com a loja (são rascunho, feitos de material público)
+- [ ] Publicar (Netlify, Vercel ou hospedagem comum — é estático, sem build)
 
 ## Bloqueios
 
-- [ ] Confirmar o endereço com a loja — divergência entre plataformas (`_memoria/empresa.md`)
-- [ ] Receber fotos em alta dos produtos: cookie partido com recheio, fondue, cookie com sorvete
-- [ ] Receber logo em `identidade/logo.png` ou `.svg`
+- [ ] **URL do sistema de pedidos** — preencher `linkPedido` em `site/assets/js/main.js`.
+      Sem isso os botões PEDIR AGORA ficam inertes
+- [ ] Confirmar o endereço com a loja — divergência entre plataformas (`_memoria/empresa.md`).
+      Enquanto isso o site mostra só "Trindade — Florianópolis/SC"
+- [ ] Receber fotos em alta dos produtos — nomes esperados em `site/README.md`
+- [ ] Receber logo em `identidade/logo.png` ou `.svg` (hoje o header usa marca em texto)
 - [ ] Confirmar sabores e preços atuais do cardápio
 
 ## Depois
