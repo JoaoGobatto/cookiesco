@@ -266,6 +266,31 @@ Quando o site estabilizar, dá pra voltar ao cache longo em imagens, mas aí col
 hash no nome dos arquivos (`cookie-partido.a1b2c3.webp`), que é o jeito certo de ter
 cache eterno sem ficar preso na versão velha.
 
+### `?v=` nos endereços
+
+O cabeçalho novo só vale pra quem ainda não baixou o arquivo. Quem visitou o site na
+configuração antiga tem gravado no navegador "essa imagem vale por 7 dias" — e ele
+não vai perguntar nada ao servidor até lá. Não dá pra apagar cache de máquina alheia;
+o que dá é **mudar o endereço**.
+
+Por isso o `index.html` chama os arquivos assim:
+
+```html
+<link rel="stylesheet" href="assets/css/styles.css?v=3">
+<img src="assets/img/hero/rv-partido.webp?v=3" ...>
+```
+
+Endereço diferente, entrada nova no cache, download novo — mesmo em navegador
+envenenado. **Sempre que trocar CSS, JS ou uma imagem do hero mantendo o mesmo nome
+de arquivo, sobe o número do `?v=`** em todas as referências de uma vez:
+
+```bash
+cd site && sed -i 's/?v=3/?v=4/g' index.html
+```
+
+Isso não vale pras fotos que você joga em `assets/img/` (galeria, Instagram, mapa):
+essas entram pela primeira vez, não têm versão velha presa em lugar nenhum.
+
 ## Detalhes técnicos
 
 - Sem framework, sem build, sem CDN. Uma requisição de CSS, uma de JS, seis de fonte.
