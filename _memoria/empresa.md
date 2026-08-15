@@ -25,7 +25,11 @@ Cookie com sorvete aparece em material público, mas ainda sem foto e sem confir
 de que segue no cardápio.
 
 **Principais entregas:**
-- Cookies recheados (sabores confirmados por avaliações: Pudim, Nutella com Ninho, Kinder Bueno, Ouro Branco, Red Velvet)
+- Cookies recheados. Nomes confirmados pelo dono, com link direto no sistema de pedidos:
+  - **Triplo Chocolate** — `?p=2738601494`
+  - **Red Ninho** — `?p=7291839806`
+  - **Napolitano** (cookie do mês de agosto/2026) — `?p=7497421571`
+  - Outros citados em avaliações, a confirmar: Pudim, Nutella com Ninho, Kinder Bueno, Ouro Branco, limão
 - Fondue de cookie (tradicional e Red Velvet) — produto de destaque nas avaliações
 - Cookie com sorvete
 - Cafés e doces complementares

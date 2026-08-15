@@ -63,8 +63,24 @@ const CONFIG = {
 };
 ```
 
-Os 7 botões de pedido da página saem daí. Se o endereço mudar, muda numa linha só.
+Os botões de pedido da página saem daí. Se o endereço mudar, muda numa linha só.
 Enquanto o campo estiver vazio, os botões ficam inertes em vez de quebrar.
+
+**Link direto por sabor.** Os CTAs do hero levam a pessoa já na página do produto, não
+na home do cardápio. O endereço de cada um fica em `CONFIG.produtos`, e o botão escolhe
+pelo `data-produto` no HTML:
+
+```js
+produtos: { 'napolitano': '...?p=7497421571', 'red-ninho': '...?p=7291839806', ... }
+```
+
+```html
+<a class="btn btn--cta" data-link="pedido" data-produto="napolitano">Pedir agora</a>
+```
+
+Sem `data-produto`, o botão cai no `linkPedido` geral — é o caso dos CTAs de seção e do
+botão fixo do mobile, que não falam de um sabor específico. Sabor sem link cadastrado
+também cai no geral, então nada quebra.
 
 **2. As fotos.** Toda foto que falta aparece como um bloco peach escrito
 `FOTO: <nome>`. É só salvar o arquivo com o nome certo em `assets/img/` que ele

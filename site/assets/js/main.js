@@ -9,6 +9,14 @@ const CONFIG = {
   // Enquanto estiver vazio, os botões PEDIR AGORA não levam a lugar nenhum.
   linkPedido: 'https://cardapio.ai/online/cookiescofloripa',
 
+  // Link direto de cada sabor, pra levar a pessoa já na página do produto.
+  // O botão usa isso quando o HTML traz data-produto; senão cai no linkPedido.
+  produtos: {
+    'napolitano':       'https://cardapio.ai/online/cookiescofloripa?p=7497421571',
+    'red-ninho':        'https://cardapio.ai/online/cookiescofloripa?p=7291839806',
+    'triplo-chocolate': 'https://cardapio.ai/online/cookiescofloripa?p=2738601494'
+  },
+
   // WhatsApp da loja, só números, com DDI+DDD.
   whatsapp: '5548988340265',
   whatsappMsg: 'Oi! Vim pelo site 🍪',
@@ -132,7 +140,9 @@ function aplicarLinks() {
   const destinos = { pedido: CONFIG.linkPedido, whatsapp: zap, mapa: CONFIG.linkMapa, google: CONFIG.linkGoogle };
 
   $$('[data-link]').forEach(a => {
-    const url = destinos[a.dataset.link];
+    const url = (a.dataset.link === 'pedido' && a.dataset.produto)
+      ? (CONFIG.produtos?.[a.dataset.produto] || CONFIG.linkPedido)
+      : destinos[a.dataset.link];
     if (!url) {
       a.setAttribute('aria-disabled', 'true');
       a.title = 'Link ainda não configurado (ver CONFIG em assets/js/main.js)';
