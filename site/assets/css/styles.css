@@ -132,14 +132,20 @@ p{margin:0 0 1rem}
 .hd.is-stuck{box-shadow:0 12px 30px -24px rgba(139,94,75,.9);background:rgba(255,253,249,.96)}
 
 .hd__in{
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  min-height:var(--hd-h);gap:16px;
+  display:grid;align-items:center;min-height:var(--hd-h);
+  /* minmax(0,1fr) impede que o menu, ao crescer, empurre a coluna do meio —
+     sem isso a logo sai do centro em telas onde o menu fica largo */
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  gap:clamp(14px,3vw,44px);
+  /* o header usa a largura da tela, não a caixa de 1180 do conteúdo:
+     menu encostado na esquerda, logo no centro da janela */
+  max-width:1600px;padding-inline:clamp(20px,3.2vw,52px);
 }
 
-.hd__nav{display:flex;align-items:center;gap:clamp(16px,2.2vw,34px)}
+.hd__nav{display:flex;align-items:center;justify-content:flex-start;gap:clamp(14px,1.9vw,30px)}
 .hd__nav a{
   position:relative;padding:6px 0;color:var(--marrom-esc);
-  font:700 .74rem/1 var(--corpo);letter-spacing:.11em;text-transform:uppercase;
+  font:700 .73rem/1 var(--corpo);letter-spacing:.09em;text-transform:uppercase;
   white-space:nowrap;transition:color .2s;
 }
 .hd__nav a::after{
@@ -156,8 +162,7 @@ p{margin:0 0 1rem}
 
 .hd__acoes{
   display:flex;align-items:center;justify-content:flex-end;gap:12px;
-  /* só afasta quando a janela é estreita o bastante pra barra alcançar o CTA */
-  padding-right:max(0px, calc(118px - (100vw - var(--wrap)) / 2));
+  padding-right:clamp(84px,8.5vw,116px);   /* espaço da barra que sangra na borda */
 }
 .hd__acoes .btn{box-shadow:none}
 
