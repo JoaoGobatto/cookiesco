@@ -5,7 +5,7 @@
 - [x] **Site da loja** — primeira versão pronta em `site/`, seguindo a estrutura da
       referência (Grill Burger) com a pele da Cookies & Co
 - [ ] Aprovar os textos do site com a loja (são rascunho, feitos de material público)
-- [ ] Publicar (Netlify, Vercel ou hospedagem comum — é estático, sem build)
+- [x] Publicar no Vercel — `vercel.json` aponta o output pra `site/`
 
 ## Bloqueios
 

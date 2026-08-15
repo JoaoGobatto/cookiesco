@@ -160,6 +160,27 @@ nada.
   `identidade/logo.svg`, dá pra trocar em 2 linhas.
 - **Horário.** "Terça a domingo, 12:30 às 18:30" veio do cardápio online.
 
+## Publicação (Vercel)
+
+O site mora em `site/`, não na raiz do repositório. Quem resolve isso é o
+`vercel.json` da raiz:
+
+```json
+{ "framework": null, "outputDirectory": "site", "cleanUrls": true }
+```
+
+Com isso o Vercel serve `site/index.html` como página inicial do domínio. Se
+por algum motivo o deploy continuar dando 404, dá pra forçar pelo painel:
+**Project → Settings → Build & Deployment → Root Directory → `site`** e
+redeploy. Uma coisa OU a outra, não as duas (com Root Directory em `site` o
+`vercel.json` da raiz deixa de ser lido).
+
+O `.vercelignore` deixa de fora `Ref/`, `templates/`, `_memoria/` e companhia —
+só a pasta do site sobe. Sem isso cada deploy carregaria os 19 MB da pasta de
+referência à toa.
+
+Não tem build: é HTML estático. Cada push no branch dispara um deploy novo.
+
 ## Detalhes técnicos
 
 - Sem framework, sem build, sem CDN. Uma requisição de CSS, uma de JS, seis de fonte.

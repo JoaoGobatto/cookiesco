@@ -1,0 +1,14 @@
+# Só a pasta site/ vai pro ar. O resto é a operação do MazyOS e não precisa
+# subir pro Vercel (e o Ref/ sozinho tem 19 MB).
+Ref/
+templates/
+_memoria/
+identidade/
+marketing/
+saidas/
+dados/
+scripts/
+.claude/
+CLAUDE.md
+README.md
+tarefas.md
