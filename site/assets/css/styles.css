@@ -88,16 +88,56 @@ p{margin:0 0 1rem}
 .btn--primary{--bg:var(--peach)}
 .btn--primary:hover{--bg:var(--peach-esc)}
 .btn--accent{--bg:var(--creme);--fg:var(--marrom-esc)}
-.btn--ghost{--bg:transparent;--fg:var(--marrom);border-color:rgba(139,94,75,.3);box-shadow:none}
-.btn--ghost:hover{--bg:rgba(139,94,75,.07)}
-.btn--outline-light{--bg:transparent;--fg:var(--creme);border-color:rgba(255,243,233,.4);box-shadow:none}
-.btn--outline-light:hover{--bg:rgba(255,243,233,.12)}
+.btn--ghost{--bg:transparent;--fg:var(--marrom);border-color:rgba(139,94,75,.24);box-shadow:none}
+.btn--ghost:hover{--bg:rgba(139,94,75,.07);border-color:rgba(139,94,75,.45)}
+.btn--outline-light{--bg:transparent;--fg:rgba(255,243,233,.82);border-color:rgba(255,243,233,.26);box-shadow:none}
+.btn--outline-light:hover{--bg:rgba(255,243,233,.1);--fg:var(--creme);border-color:rgba(255,243,233,.5)}
 .btn--dark{--bg:var(--marrom-esc);--fg:var(--creme)}
 .btn--dark:hover{--bg:var(--marrom)}
 .btn--outline-dark{--bg:transparent;--fg:var(--marrom-esc);border-color:rgba(94,59,44,.45);box-shadow:none}
 .btn--outline-dark:hover{--bg:rgba(94,59,44,.1)}
-.btn--lg{padding:18px 32px;font-size:.88rem}
-.btn--sm{padding:12px 20px;font-size:.76rem}
+.btn--lg{padding:20px 38px;font-size:.92rem}
+.btn--sm{padding:13px 22px;font-size:.78rem}
+
+/* --- CTA de pedido: é o botão que tem que puxar o olho --- */
+.btn--cta{
+  --fg:var(--tinta);
+  position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(180deg,#FCC6AB 0%,#F3A47F 60%,#EE9670 100%);
+  letter-spacing:.11em;
+  box-shadow:
+    0 14px 30px -10px rgba(238,150,112,.7),
+    0 0 0 0 rgba(246,176,147,.55),
+    inset 0 1px 0 rgba(255,255,255,.55);
+}
+/* brilho que atravessa o botão no hover */
+.btn--cta::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.65) 50%,transparent 65%);
+  translate:-120% 0;transition:translate .65s cubic-bezier(.2,.8,.3,1);
+}
+.btn--cta:hover{
+  background:linear-gradient(180deg,#FFD5BC 0%,#F8B08D 60%,#F2A17B 100%);
+  box-shadow:
+    0 20px 40px -12px rgba(238,150,112,.85),
+    0 0 0 6px rgba(246,176,147,.22),
+    inset 0 1px 0 rgba(255,255,255,.6);
+}
+.btn--cta:hover::before{translate:120% 0}
+
+/* respiro lento só no CTA do hero, que é o ponto de conversão principal */
+.btn--pulsa{animation:respira 3.4s ease-in-out infinite}
+@keyframes respira{
+  0%,100%{box-shadow:
+    0 14px 30px -10px rgba(238,150,112,.7),
+    0 0 0 0 rgba(246,176,147,.5),
+    inset 0 1px 0 rgba(255,255,255,.55)}
+  55%{box-shadow:
+    0 16px 34px -10px rgba(238,150,112,.8),
+    0 0 0 12px rgba(246,176,147,0),
+    inset 0 1px 0 rgba(255,255,255,.55)}
+}
+.btn--pulsa:hover{animation:none}
 
 /* ============ TOPBAR ============ */
 .topbar{background:var(--marrom);color:var(--creme);font-size:.82rem}
@@ -164,7 +204,6 @@ p{margin:0 0 1rem}
   display:flex;align-items:center;justify-content:flex-end;gap:12px;
   padding-right:clamp(84px,8.5vw,116px);   /* espaço da barra que sangra na borda */
 }
-.hd__acoes .btn{box-shadow:none}
 
 /* barra que sangra na borda direita */
 .hd__grade{
@@ -520,9 +559,11 @@ p{margin:0 0 1rem}
 /* ============ FAB MOBILE ============ */
 .fab{
   display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:70;
-  background:var(--peach);color:var(--tinta);text-align:center;justify-content:center;
-  font:700 .9rem/1 var(--corpo);letter-spacing:.09em;text-transform:uppercase;
-  padding:18px;border-radius:999px;box-shadow:0 16px 34px -16px rgba(41,37,37,.6);
+  background:linear-gradient(180deg,#FCC6AB 0%,#F3A47F 60%,#EE9670 100%);
+  color:var(--tinta);text-align:center;justify-content:center;
+  font:700 .95rem/1 var(--corpo);letter-spacing:.11em;text-transform:uppercase;
+  padding:19px;border-radius:999px;
+  box-shadow:0 18px 36px -14px rgba(41,37,37,.7), inset 0 1px 0 rgba(255,255,255,.55);
 }
 
 /* ============ REVEAL ============ */

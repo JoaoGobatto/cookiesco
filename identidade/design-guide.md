@@ -57,7 +57,11 @@ de cookie quente. Foto pequena é erro.
 
 - Bordas: suaves, nada de canto vivo
 - Border-radius dos cards: generoso (20-28px)
-- Botões: pill (totalmente arredondados), peach com texto escuro, rótulo em caixa alta e curto
+- Botões: pill (totalmente arredondados), rótulo em caixa alta e curto, sem emoji
+- **Botão de pedido:** é o que tem que puxar o olho. Preenchimento em degradê peach
+  (`#FCC6AB` → `#EE9670`), texto escuro, brilho quente em volta e um respiro lento
+  no CTA principal do hero. Os secundários ficam de contorno fino e texto mais
+  apagado, pra hierarquia ficar óbvia
 - Sombras: baixas e quentes, difusas — nunca sombra dura cinza
 - Microinterações: card do cookie levanta levemente no hover; elementos entram suave no scroll;
   recheio pode ter animação sutil de "derretendo". Nada exagerado

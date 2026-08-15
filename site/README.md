@@ -205,6 +205,19 @@ O Flow rende melhor num loop na seção do fondue ou direto no Instagram, em MP4
    e as três cores do tema.
 3. Só isso — o slider conta os slides sozinho e some com as setas se sobrar um só.
 
+## Botões de pedido
+
+Todo botão que leva ao sistema de pedidos usa a classe `btn--cta`, então mudar o
+tratamento de um muda o de todos — são dez na página. O visual é degradê peach com
+brilho quente em volta e um brilho que atravessa no hover; o do hero ganha `btn--pulsa`,
+um respiro lento de sombra, por ser o ponto de conversão principal.
+
+Os secundários (`btn--outline-light`, `btn--ghost`) são de propósito mais apagados:
+contorno fino e texto translúcido. É o contraste entre os dois que faz o CTA saltar,
+não só a cor dele.
+
+Sem emoji nos rótulos.
+
 ## O que está pendente de confirmação com a loja
 
 - **Endereço.** O site mostra só "Trindade — Florianópolis/SC", de propósito. As
