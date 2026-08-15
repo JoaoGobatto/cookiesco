@@ -352,7 +352,7 @@ p{margin:0 0 1rem}
 /* --- setas do slider --- */
 .hero__arrows{
   position:absolute;z-index:4;left:50%;transform:translateX(-50%);
-  bottom:clamp(52px,7vw,86px);display:flex;gap:14px;
+  bottom:clamp(104px,10vw,132px);display:flex;gap:14px;
 }
 .hero__arrow{
   width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
@@ -364,7 +364,7 @@ p{margin:0 0 1rem}
 
 /* --- indicador de scroll --- */
 .hero__scroll{
-  position:absolute;z-index:4;left:50%;translate:-50% 0;bottom:clamp(24px,3vw,34px);
+  position:absolute;z-index:4;left:50%;translate:-50% 0;bottom:clamp(66px,6.5vw,88px);
   width:54px;height:6px;border-radius:999px;background:rgba(255,243,233,.25);
 }
 .hero__scroll span{
@@ -375,15 +375,7 @@ p{margin:0 0 1rem}
 
 /* --- borda recortada --- */
 .hero__edge{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(40px,5vw,74px);z-index:3}
-.hero__edge path{fill:var(--marrom-esc)}
-
-/* ============ INFOBAR ============ */
-.infobar{background:var(--marrom-esc);color:var(--creme)}
-.infobar__in{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-  padding:18px 22px;font-size:.92rem;
-}
-.infobar b{font-weight:700}
+.hero__edge path{fill:var(--creme)}
 
 /* ============ FOTO: base e placeholder ============
    Toda foto do site usa .shot. Quando o arquivo ainda não existe, o JS marca
@@ -570,7 +562,7 @@ left:16px;right:16px;bottom:16px;z-index:70;
   .avals__link{grid-column:1/-1;text-align:center;justify-self:center;margin-top:6px}
   .avals__seta--esq{left:-8px}
   .avals__seta--dir{right:-8px}
-  .hero{min-height:0;padding-bottom:clamp(70px,10vw,100px);flex-direction:column;align-items:stretch}
+  .hero{min-height:0;padding-bottom:clamp(84px,12vw,110px);flex-direction:column;align-items:stretch}
   .hero__arrows{position:static;transform:none;justify-content:center;margin-top:26px}
   .hero__scroll{display:none}
   .hero__slide{grid-template-columns:1fr;gap:8px;text-align:center;justify-items:center}

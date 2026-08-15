@@ -19,8 +19,9 @@ site/
 
 ## Estado atual — em construção, seção por seção
 
-A página tem hoje **header, hero, "muito mais que cookies" e avaliações**, mais topbar
-e rodapé. As outras seções (anatomia do cookie, cardápio completo, delivery, motivos,
+A página tem hoje **header, hero, "muito mais que cookies" e avaliações**, mais rodapé.
+A barra superior de contato e a faixa de quatro ícones abaixo do hero foram removidas
+a pedido do dono. As outras seções (anatomia do cookie, cardápio completo, delivery, motivos,
 galeria, Instagram, localização) foram removidas de propósito para serem refeitas uma
 de cada vez, com mais cuidado.
 
