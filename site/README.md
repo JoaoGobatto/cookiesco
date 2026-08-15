@@ -19,10 +19,10 @@ site/
 
 ## Estado atual — em construção, seção por seção
 
-A página tem hoje **header, hero e avaliações**, mais topbar e rodapé. As outras
-seções (destaque de produto, anatomia do cookie, cardápio, fondue, delivery,
-motivos, galeria, Instagram, localização) foram removidas de propósito para serem
-refeitas uma de cada vez, com mais cuidado.
+A página tem hoje **header, hero, "muito mais que cookies" e avaliações**, mais topbar
+e rodapé. As outras seções (anatomia do cookie, cardápio completo, delivery, motivos,
+galeria, Instagram, localização) foram removidas de propósito para serem refeitas uma
+de cada vez, com mais cuidado.
 
 Elas não se perderam: estão no histórico do git, no commit anterior à remoção. Para
 consultar o que existia:
@@ -45,6 +45,7 @@ A **estrutura** segue o site de referência da Grill Burger:
 | topbar com contato | topbar com horário, bairro e WhatsApp |
 | header com logo central + CTA | header com logo central + `PEDIR ONLINE` e barra sangrada |
 | hero: slider, produto explodido, setas, borda recortada | mesma composição, com o cookie em camadas e fundo por sabor |
+| menu com quatro cartões de categoria | "Muito mais que cookies", quatro cartões de produto |
 | depoimentos | avaliações do Google com resumo e carrossel |
 
 A **pele** é toda da Cookies & Co, de `identidade/design-guide.md`: peach `#F6B093`,
@@ -214,6 +215,19 @@ O Flow rende melhor num loop na seção do fondue ou direto no Instagram, em MP4
 2. Duplica um `<article class="hero__slide">` no `index.html`, troca texto, imagens
    e as três cores do tema.
 3. Só isso — o slider conta os slides sozinho e some com as setas se sobrar um só.
+
+## Muito mais que cookies
+
+Quatro cartões com foto em retrato (4:5), nome e uma linha de texto. É HTML direto,
+sem lista em JS — são poucos itens e cada um tem foto própria.
+
+As fotos ficam em `assets/img/produtos/`, cortadas de originais verticais guardados em
+`identidade/fotos/`. Falta a do **fondue de cookie**: o cartão mostra o placeholder
+`FOTO: FONDUE DE COOKIE` até o arquivo `fondue.webp` aparecer nessa pasta — não precisa
+mexer no HTML.
+
+O sorvete vem em copo da marca *Vanilla cookies&co*; o dono confirmou que é produto da
+casa, por isso entra aqui.
 
 ## Avaliações
 

@@ -18,7 +18,7 @@ const CONFIG = {
   linkMapa: '',
 
   // Página de avaliações no Google (o "Ver todas no Google").
-  linkGoogle: ''
+  linkGoogle: 'https://share.google/syQp1B6EHSXhLBuX3'
 };
 
 /* ------------------------------------------------------------
