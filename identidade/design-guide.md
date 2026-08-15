@@ -32,6 +32,15 @@ Mistura de pastel, fotografia gastronômica macro, handwritten, editorial e pequ
 
 ---
 
+## Fundo do hero — cor por produto
+
+O topo do site pinta o fundo com a cor do cookie que está na tela: cookie de
+chocolate → cacau escuro `#3A231A`; red velvet → vinho `#4A121C`. A regra pra um
+sabor novo é pegar o tom dominante da massa e escurecer pra 15-25% de luminosidade.
+
+Isso vale só pro hero. O resto do site continua creme e peach. E nada de preto puro
+mesmo aqui — cacau bem escuro, não preto.
+
 ## Estilo geral
 
 Fotos gigantes, pouco texto, frases curtas, muito espaço em branco, cores suaves e o produto
