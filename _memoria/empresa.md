@@ -13,8 +13,11 @@
 - WhatsApp: (48) 98834-0265
 
 **Além do cookie (confirmado pelo dono em ago/2026):** chocolate quente cremoso, fondue de
-cookie, fatias de torta e sorvete. O sorvete vem em copo da marca **Vanilla cookies&co** —
-o dono confirmou que é produto da casa/marca irmã, então pode aparecer no site.
+cookie e fatias de torta. O fondue é servido em copo da marca **Vanilla cookies&co** — o
+dono confirmou que é produto da casa/marca irmã, então pode aparecer no site.
+
+Cookie com sorvete aparece em material público, mas ainda sem foto e sem confirmação
+de que segue no cardápio.
 
 **Principais entregas:**
 - Cookies recheados (sabores confirmados por avaliações: Pudim, Nutella com Ninho, Kinder Bueno, Ouro Branco, Red Velvet)

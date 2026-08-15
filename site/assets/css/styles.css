@@ -64,6 +64,7 @@ p{margin:0 0 1rem}
 .over--light{color:var(--peach)}
 .hand{font-family:var(--mao);font-size:1.7rem;color:var(--peach-esc);margin:0 0 .4rem;line-height:1}
 .lead{font-size:1.13rem;color:var(--tinta-70);max-width:44ch}
+.lead--centro{margin-inline:auto;max-width:52ch;margin-top:.9rem}
 .hl{position:relative;display:inline-block;color:var(--marrom)}
 .hl::after{
   content:"";position:absolute;left:-.05em;right:-.05em;bottom:-.02em;height:.22em;

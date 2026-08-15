@@ -221,13 +221,18 @@ O Flow rende melhor num loop na seção do fondue ou direto no Instagram, em MP4
 Quatro cartões com foto em retrato (4:5), nome e uma linha de texto. É HTML direto,
 sem lista em JS — são poucos itens e cada um tem foto própria.
 
-As fotos ficam em `assets/img/produtos/`, cortadas de originais verticais guardados em
-`identidade/fotos/`. Falta a do **fondue de cookie**: o cartão mostra o placeholder
-`FOTO: FONDUE DE COOKIE` até o arquivo `fondue.webp` aparecer nessa pasta — não precisa
-mexer no HTML.
+Ordem: nossos cookies, fondue, chocolate quente, fatias de torta. As fotos ficam em
+`assets/img/produtos/`, cortadas para 4:5 a partir dos originais guardados em
+`identidade/fotos/`.
 
-O sorvete vem em copo da marca *Vanilla cookies&co*; o dono confirmou que é produto da
-casa, por isso entra aqui.
+Trocar qualquer uma é substituir o arquivo na pasta, mantendo o nome. Se a foto sumir,
+o cartão vira placeholder identificado em vez de ícone quebrado.
+
+O fondue é servido em copo da marca *Vanilla cookies&co*; o dono confirmou que é produto
+da casa, por isso entra aqui.
+
+> A foto da pilha de cookies veio em 409px de largura, contra 900px das outras. Serve no
+> tamanho em que aparece, mas fica mais macia em tela retina — vale pedir o original.
 
 ## Avaliações
 
