@@ -449,14 +449,16 @@ p{margin:0 0 1rem}
 .aval__quem{min-width:0;flex:1}
 .aval__nome{font-weight:700;font-size:.95rem;color:var(--tinta);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.aval__quando{font-size:.8rem;color:var(--tinta-55)}
+.aval__quando{font-size:.78rem;color:var(--tinta-55);display:block;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aval__quando b{font-weight:700;color:var(--peach-esc)}
 .aval__g{width:19px;height:19px;flex:none}
 .aval__linha{display:flex;align-items:center;gap:7px}
 .aval__linha .estrelas{font-size:1.02rem}
 .aval__ok{width:15px;height:15px;color:#4285F4;flex:none}
 .aval__txt{
   font-size:.94rem;line-height:1.55;color:var(--tinta-70);margin:0;
-  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+  display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;
 }
 .aval.is-aberta .aval__txt{-webkit-line-clamp:unset}
 .aval__mais{

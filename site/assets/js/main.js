@@ -31,27 +31,55 @@ const RESUMO = {
   total: null      // ex: 148
 };
 
-/* Uma entrada por avaliação. Só texto real de cliente — nada inventado.
-   nome, quando e nota saem do próprio card do Google. */
+/* Avaliações reais do perfil do Google, transcritas dos prints da loja.
+   Nada de texto inventado aqui — se não saiu da boca de um cliente, não entra.
+   guia: true marca quem é Local Guide, que é sinal de credibilidade. */
 const AVALIACOES = [
   {
-    nome: null,
-    quando: null,
+    nome: 'Maria Noêmia',
+    quando: '4 semanas atrás',
+    guia: true,
     nota: 5,
-    texto: 'Uma das melhores cookies que já comemos.'
+    texto: 'Eles têm os melhores cookies de Floripa, vale a pena cada centavo!! Recheios e massas sempre perfeitos, sempre chega quentinhooo, eu amo!'
   },
   {
-    nome: null,
-    quando: null,
+    nome: 'Tainara Talita',
+    quando: '3 anos atrás',
+    guia: true,
     nota: 5,
-    texto: 'Atendimento maravilhoso.'
+    texto: 'Os melhores Cookies que eu já comi na vida!! São perfeitos e viciantes <3\nFora o atendimento que é excepcional.'
   },
   {
-    nome: null,
-    quando: null,
+    nome: 'Gabriela Westphal',
+    quando: 'um ano atrás',
+    guia: true,
     nota: 5,
-    texto: 'O fondue de cookie Red Velvet chamou atenção — e o cookie chegou quentinho.'
+    texto: 'Atendimento maravilhoso, com as melhores indicações.\n\n'
+         + 'Pudim: super doce, bem recheado, sou suspeita porque AMO creme branco, nota 9/10\n\n'
+         + 'Nutella com ninho: doce, super gostoso, nota 8/10\n\n'
+         + 'Kinder bueno: menos doce, estava bem quentinho e aumentou o sabor dele, ele derretendo na boca fica ótimo! Nota 7,5/10\n\n'
+         + 'Ouro branco não achamos nada demais, nota 6/10\n\n'
+         + 'R$20 reais/cookie em média'
+  },
+  {
+    nome: 'Andressa Tatiana',
+    quando: '8 meses atrás',
+    guia: true,
+    nota: 5,
+    texto: 'Surreal, vale cada centavo! 😍🤩\n\nHoje pedi delivery, mas conheci o local através do Floripa em Dobro.'
   }
+
+  // Avaliação da Lara Dalla Nora (5 estrelas, 2 anos atrás) fica de fora por ora:
+  // é elogiosa, mas fala da sacola surpresa do Food To Save e começa com "mesmo não
+  // sendo frescos". Numa página que vende cookie quentinho, isso trabalha contra.
+  // Pra usar, é só descomentar:
+  // {
+  //   nome: 'Lara Dalla Nora', quando: '2 anos atrás', guia: true, nota: 5,
+  //   texto: 'Comprei a sacola surpresa do food to save, e mesmo não sendo frescos eles '
+  //        + 'estavam deliciosos! Foi uma experiência muito boa conhecer os cookies, o de '
+  //        + 'limão me surpreendeu, seria um que eu não pediria normalmente, mas achei '
+  //        + 'incrível! Parabéns e, parabéns também por participarem do food to save!'
+  // }
 ];
 
 /* ------------------------------------------------------------
@@ -191,7 +219,7 @@ function montarAvaliacoes() {
         <span class="aval__avatar" style="background:${cores[i % cores.length]}" aria-hidden="true">${inicial(a.nome)}</span>
         <span class="aval__quem">
           <span class="aval__nome">${a.nome ? escapa(a.nome) : 'Cliente no Google'}</span>
-          ${a.quando ? `<span class="aval__quando">${escapa(a.quando)}</span>` : ''}
+          <span class="aval__quando">${a.guia ? '<b>Local Guide</b> · ' : ''}${a.quando ? escapa(a.quando) : ''}</span>
         </span>
         <svg class="aval__g" viewBox="0 0 48 48" aria-hidden="true">
           <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.8 2.6 13.6l7.8 6.1C12.3 13.9 17.6 9.5 24 9.5z"/>
@@ -206,7 +234,7 @@ function montarAvaliacoes() {
           <path d="M12 2l2.4 1.8 3-.3 1 2.8 2.6 1.5-1 2.9 1 2.9-2.6 1.5-1 2.8-3-.3L12 22l-2.4-1.8-3 .3-1-2.8L3 16.2l1-2.9-1-2.9 2.6-1.5 1-2.8 3 .3L12 2zm-1.2 13.5l5.3-5.3-1.4-1.4-3.9 3.9-1.8-1.8L7.6 12l3.2 3.5z"/>
         </svg>
       </div>
-      <p class="aval__txt">${escapa(a.texto)}</p>
+      <p class="aval__txt">${escapa(a.texto).replace(/\n/g, '<br>')}</p>
     </article>`).join('');
 
   // "ler mais" só onde o texto realmente foi cortado

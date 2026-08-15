@@ -28,6 +28,15 @@
 
 Usar o do cardápio oficial como padrão e confirmar com a loja antes de publicar.
 
+**Preço:** uma avaliação do Google (Gabriela Westphal, Local Guide) cita "R$20 reais/cookie
+em média". É estimativa de cliente, não tabela oficial — confirmar com a loja.
+
+**Sabor extra citado em avaliação:** cookie de limão (Lara Dalla Nora). Não aparecia no
+levantamento inicial — confirmar se está no cardápio atual.
+
+**Food To Save:** a loja já participou do programa de sacolas surpresa (citado em avaliação
+de 2 anos atrás). Confirmar se ainda participa.
+
 **Percepção dos clientes (avaliações públicas):** cookies grandes e bem recheados, sabores variados, atendimento atencioso. O cookie servido quentinho aparece como fator que melhora muito a experiência. Notas relatadas por sabor: Pudim 9/10, Nutella com Ninho 8/10, Kinder Bueno 7,5/10, Ouro Branco 6/10 (esse último não usar como destaque principal).
 
 **Assinatura da marca:** *"Cookies, 'cause they never disappoint 🧡🍪"*

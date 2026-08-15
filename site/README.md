@@ -236,10 +236,17 @@ A palavra do topo (Excelente / Muito bom / Bom) é calculada da nota, não escri
 { nome: 'André Cisne', quando: '2 anos atrás', nota: 5, texto: 'Delicioso o lanche...' }
 ```
 
-`nome` e `quando` com `null` viram "Cliente no Google" e some a data — é o estado de
-hoje, porque as três avaliações que estão lá vieram de material público sem o nome
-completo do autor. O avatar é a inicial do nome num círculo colorido, o mesmo recurso
-que o Google usa para quem não tem foto.
+`guia: true` mostra o selo Local Guide, que pesa na credibilidade. `nome` e `quando` com
+`null` viram "Cliente no Google" e escondem a data. O avatar é a inicial do nome num
+círculo colorido, o mesmo recurso que o Google usa para quem não tem foto. Quebra de
+linha no texto (`\n`) vira parágrafo no card.
+
+As quatro que estão lá foram transcritas dos prints do perfil da loja: Maria Noêmia,
+Tainara Talita, Gabriela Westphal e Andressa Tatiana, todas 5 estrelas e Local Guide.
+
+Existe uma quinta, da Lara Dalla Nora, comentada no arquivo. É elogiosa e 5 estrelas,
+mas fala da sacola surpresa do Food To Save e abre com "mesmo não sendo frescos" —
+numa página que vende cookie quentinho isso trabalha contra. Para usar, descomentar.
 
 Texto comprido é cortado em 4 linhas com um "Ler mais" — que só aparece quando o texto
 realmente foi cortado, não em todo card.
