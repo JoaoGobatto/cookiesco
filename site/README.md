@@ -162,9 +162,17 @@ depois três limpezas:
    evidentes agora que é escuro. Saem por crescimento a partir de sementes que batem
    com o fundo estimado localmente, limitado pelas mesmas bordas do recorte, o que
    impede de vazar pra dentro da massa.
+4. **O recheio do red velvet** precisou de tratamento próprio: naquela foto o creme e
+   o fundo terracota têm quase a mesma cor (215,160,129 contra 223,147,121), então a
+   detecção de borda não enxerga a divisa e o preenchimento entra no recheio, deixando
+   só um contorno fino. O que separa os dois ali é o brilho — o creme é ~30 mais claro
+   que o fundo, e a massa ~25 mais escura. Então: estima o fundo por interpolação,
+   devolve pro recorte o que estiver acima de `fundo + 18` dentro do vão entre as
+   metades, e abre como transparente o que ficar colado no brilho do fundo (os furos
+   de verdade do recheio, aqueles que na foto deixam ver o fundo através).
 
 Cor sozinha não resolve: no red velvet o fundo terracota e a massa média têm quase
-a mesma razão verde/vermelho.
+a mesma razão verde/vermelho, e o creme e o fundo têm quase o mesmo RGB.
 
 Pra refazer à mão com outra foto, o caminho mais simples é o Gemini, uma por vez:
 
