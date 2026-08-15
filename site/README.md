@@ -116,7 +116,7 @@ escurece pra ficar entre 15% e 25% de luminosidade. Foi assim que saíram:
 | Slide | Massa | Fundo | Blobs |
 |---|---|---|---|
 | chocolate | `#2F1C16` | `#3A231A` | `#52301F` / `#6B3F27` |
-| red velvet | `#6A0E15` | `#4A121C` | `#661923` / `#86222E` |
+| red velvet | `#74131A` | `#4E1217` | `#6D181E` / `#8C1D25` |
 
 Não usar preto puro — o design-guide proíbe, e cookie escuro sobre fundo escuro
 demais some. O chocolate ficou num cacau bem escuro, não em preto.
@@ -149,32 +149,41 @@ Camadas em `assets/img/hero/`, recortadas das fotos em `identidade/fotos/`:
 
 ### Como os recortes foram feitos
 
-As fotos vêm com fundo terracota e uma bancada escura embaixo. O recorte sai por
-detecção de borda — o fundo é um degradê liso e o cookie tem contorno duro — e
-depois três limpezas:
+**O fundo da foto decide o trabalho todo.** Vale a pena ler isso antes da próxima
+sessão de fotos.
 
-1. **A borda da bancada** entra como um risco fino e comprido colado no cookie.
-   Sai por uma regra geométrica: apagar o que é fino na vertical e longo na
-   horizontal. Os fios de doce também são finos, mas verticais, então ficam.
-2. **O pé do cookie** mergulha na sombra da bancada e o contorno se perde. A máscara
-   cresce ali pra dentro do escuro, limitada à faixa horizontal que o cookie já ocupa.
-3. **Bolsões de fundo presos entre os fios** — invisíveis quando o fundo era peach,
-   evidentes agora que é escuro. Saem por crescimento a partir de sementes que batem
-   com o fundo estimado localmente, limitado pelas mesmas bordas do recorte, o que
-   impede de vazar pra dentro da massa.
-4. **O recheio do red velvet** precisou de tratamento próprio: naquela foto o creme e
-   o fundo terracota têm quase a mesma cor (215,160,129 contra 223,147,121), então a
-   detecção de borda não enxerga a divisa e o preenchimento entra no recheio, deixando
-   só um contorno fino. O que separa os dois ali é o brilho — o creme é ~30 mais claro
-   que o fundo, e a massa ~25 mais escura. Então: estima o fundo por interpolação,
-   devolve pro recorte o que estiver acima de `fundo + 18` dentro do vão entre as
-   metades, e abre como transparente o que ficar colado no brilho do fundo (os furos
-   de verdade do recheio, aqueles que na foto deixam ver o fundo através).
+*Fundo frio (azul-acinzentado) — o caminho fácil.* O red velvet foi refotografado
+assim, e o recorte virou uma linha de código: cookie, creme e gotas são quentes
+(vermelho menos azul entre +40 e +73), fundo e bancada são frios (entre −33 e −12).
+Um corte em `R − B > 12` separa tudo de uma vez, sem tocar em borda, sombra ou
+textura. Só um cuidado: o preenchimento de buracos fecha junto os furos do recheio,
+aqueles que na foto deixam ver o fundo através — reabre o que for francamente frio
+e eles voltam a ser transparentes.
 
-Cor sozinha não resolve: no red velvet o fundo terracota e a massa média têm quase
-a mesma razão verde/vermelho, e o creme e o fundo têm quase o mesmo RGB.
+*Fundo quente (terracota) — o caminho difícil.* Foi o caso do cookie de chocolate e
+da primeira foto do red velvet. Aí o fundo tem cor parecida com o produto e o
+recorte precisa de detecção de borda (o fundo é liso, o cookie tem contorno duro),
+mais três remendos:
 
-Pra refazer à mão com outra foto, o caminho mais simples é o Gemini, uma por vez:
+1. **A borda da bancada** entra como um risco fino e comprido colado no cookie. Sai
+   por regra geométrica: apagar o que é fino na vertical e longo na horizontal. Os
+   fios de doce também são finos, mas verticais, então ficam.
+2. **O pé do cookie** mergulha na sombra da bancada e perde o contorno. A máscara
+   cresce ali pra dentro do escuro, limitada à faixa horizontal que o cookie ocupa.
+3. **Bolsões de fundo presos entre os fios** — invisíveis quando o fundo do site era
+   peach, evidentes agora que é escuro. Saem por crescimento a partir de sementes que
+   batem com o fundo estimado localmente.
+
+E na primeira foto do red velvet ainda teve um quarto problema: creme (215,160,129)
+e fundo (223,147,121) com praticamente o mesmo RGB. A borda entre os dois some e o
+preenchimento come o recheio. Deu pra resolver pelo brilho — o creme é ~30 mais
+claro que o fundo naquele ponto — mas o resultado nunca ficou tão limpo quanto o da
+foto de fundo azul.
+
+**Conclusão pra fotografar:** fundo liso e **frio** (azul, cinza-azulado, verde
+acinzentado), produto quente. Assim o recorte é exato e sai em segundos.
+
+Pra refazer à mão, o caminho mais simples é o Gemini, uma foto por vez:
 
 > Remova o fundo desta foto e devolva um PNG com fundo transparente. Preserve as
 > bordas do cookie e os fios de recheio, sem halo branco em volta. Não altere cor,
@@ -189,8 +198,9 @@ O Flow rende melhor num loop na seção do fondue ou direto no Instagram, em MP4
 
 ### Pra somar um slide novo
 
-1. Manda a foto do cookie (mesmo enquadramento das outras: fundo liso, cookie inteiro
-   à esquerda e partido à direita).
+1. Manda a foto do cookie: mesmo enquadramento das outras (cookie inteiro à esquerda,
+   partido à direita) e **fundo liso e frio**, azul ou cinza-azulado — é o que faz o
+   recorte sair exato.
 2. Duplica um `<article class="hero__slide">` no `index.html`, troca texto, imagens
    e as três cores do tema.
 3. Só isso — o slider conta os slides sozinho e some com as setas se sobrar um só.
