@@ -12,7 +12,7 @@ site/
 │   ├── css/styles.css
 │   ├── js/main.js          ← CONFIG e CARDÁPIO ficam aqui
 │   ├── fonts/              ← Baloo 2, DM Sans e Caveat auto-hospedadas
-│   └── img/                ← as fotos entram aqui (ainda vazia)
+│   └── img/                ← as fotos entram aqui (hero/ já tem os recortes)
 ├── briefing-site.md        ← a direção acordada
 └── README.md
 ```
@@ -25,7 +25,7 @@ A **estrutura** segue o site de referência da Grill Burger, seção por seção
 |---|---|
 | topbar com contato | topbar com horário, bairro e WhatsApp |
 | header com logo central + CTA vermelho | header com logo central + `PEDIR AGORA 🍪` |
-| hero com foto do burger | hero com foto do cookie + selo giratório |
+| hero: slider, produto explodido, setas, borda recortada | mesma composição, com o cookie em camadas |
 | "Tá na dúvida? Pede logo o BLACK!!!" | "Tá na dúvida? Pede logo o de Pudim." |
 | ingredientes ao redor do burger | anatomia ao redor do cookie |
 | menu com abas e preços | cardápio com abas por categoria |
@@ -64,8 +64,7 @@ entra sozinho — não precisa mexer no HTML. O hero tem regras próprias: veja
 
 | Arquivo | O que é |
 |---|---|
-| `hero-cookie.jpg` | cookie partido ao meio, recheio escorrendo (a foto mais importante do site) |
-| `cookie-pudim.jpg` | o cookie de pudim inteiro |
+| `cookie-pudim.jpg` | o cookie de pudim inteiro (seção "Tá na dúvida?") |
 | `cookie-aberto.jpg` | cookie aberto mostrando o recheio |
 | `fondue.jpg` | fondue de cookie |
 | `cookie-sorvete.jpg` | cookie quente com bola de sorvete |
@@ -87,64 +86,63 @@ ainda não foram confirmados. `tag` é opcional (o selinho verde).
 ## O cookie do hero
 
 A seção 1 copia a composição do slider da referência: fundo chapado, headline em
-caixa alta, produto explodido à direita sobre as formas orgânicas. O espaço do
-produto (`.stage` no HTML) já está reservado e animado — hoje mostra a pilha
-tracejada com o nome de cada camada.
+caixa alta, produto flutuando à direita sobre as formas orgânicas. O produto é
+montado em **camadas independentes** — cada uma é um recorte com fundo transparente
+que anda num ritmo diferente quando o mouse passa e se abre no hover.
 
-O produto é montado em **camadas separadas**, igual ao hambúrguer desmontado da
-referência. Cada camada é um PNG com fundo transparente em `assets/img/hero/`:
+Camadas atuais, em `assets/img/hero/` (recortadas da foto original que está em
+`identidade/fotos/cookie-original.jpg`):
 
-| Arquivo | Camada | Como aparece |
+| Arquivo | Camada | Comportamento |
 |---|---|---|
-| `cookie-topo.png` | metade de cima do cookie | sobe e inclina no hover |
-| `cookie-recheio.png` | o recheio / fio escorrendo | fica no meio, quase parado |
-| `cookie-base.png` | metade de baixo | desce no hover |
-| `cookie-pedacos.png` | migalhas e pedaços de chocolate | flutua solto no canto |
-| `fondue.png` | slide 2 | imagem única, sem camadas |
-| `cookie-sorvete.png` | slide 3 | imagem única, sem camadas |
+| `cookie-partido.webp` | cookie partido, com o recheio escorrendo | protagonista, cresce um pouco no hover |
+| `cookie-inteiro.webp` | cookie inteiro | fica atrás, recua e inclina no hover |
+| `chip-1/2/3.webp` | gotas de chocolate soltas | flutuam e se espalham no hover |
 
-**Especificação:** PNG com canal alpha, quadrado, 1600×1600 no mínimo, produto
-ocupando ~85% do quadro, **sem sombra embutida no arquivo** (o CSS já aplica a
-sombra). Cada camada precisa estar na mesma moldura das outras — se você recortar
-as três metades da mesma foto sem mudar o enquadramento, elas encaixam sozinhas.
+**Como reposicionar sem mexer em CSS.** Cada camada carrega a própria posição no
+`style` do HTML, em porcentagem do palco:
 
-**Se você tiver só uma imagem:** salva como `cookie-base.png` e pronto. O site
-detecta que as outras camadas não existem, remove os fantasmas e mostra a imagem
-única (perde o efeito de explodir, mantém o parallax).
+```html
+<div class="stage__layer camada--partido" style="--l:24%;--t:-4%;--w:76%;--f:1.15">
+```
 
-### Como produzir
+- `--l` distância da esquerda · `--t` distância do topo · `--w` largura
+- `--f` é a "profundidade": quanto maior, mais a camada corre com o mouse.
+  O cookie de trás usa `.45`, o da frente `1.15`, as gotas `2.2` a `3.1`.
 
-**Caminho recomendado — foto real + Gemini pra recortar.** O produto é de comer;
-cookie gerado por IA no hero é propaganda de um produto que não existe. Fotografe:
+Trocar a foto é trocar o arquivo e, se a proporção mudar, ajustar `--w`/`--t`.
 
-- cookie partido ao meio, as duas metades ligeiramente separadas, recheio esticando
-- fundo liso e claro (parede branca, papel), luz natural pela lateral, sem flash
-- câmera na altura do cookie, não de cima
-- três disparos do mesmo ponto, sem mexer no tripé/celular: (1) as duas metades
-  juntas, (2) só a metade de cima, (3) só a metade de baixo
+### Como os recortes foram feitos
 
-Depois, no Gemini, uma imagem por vez:
+A foto original tinha fundo terracota e uma bancada escura embaixo. O recorte saiu
+por detecção de borda (o fundo é um degradê liso, o cookie tem contorno duro),
+depois separação em componentes e limpeza da faixa da bancada. Se quiser refazer
+com outra foto, o caminho manual mais simples é o Gemini, uma imagem por vez:
 
 > Remova o fundo desta foto e devolva um PNG com fundo transparente. Preserve as
 > bordas do cookie e os fios de recheio, sem halo branco em volta. Não altere cor,
 > textura nem enquadramento.
 
-**Enquanto a foto real não vem — placeholder de IA.** Serve pra fechar o layout,
-mas troca antes de publicar:
+**Especificação:** fundo transparente, lado maior de 1500px, **sem sombra embutida
+no arquivo** (o CSS aplica a sombra). WebP fica ~8x menor que PNG com a mesma
+qualidade — os dois funcionam, é só ajustar o `src`.
 
-> Fotografia macro de um cookie artesanal grande partido ao meio, recheio cremoso
-> branco escorrendo entre as duas metades, massa amanteigada com pedaços de
-> chocolate, luz natural suave vinda da lateral, produto centralizado ocupando quase
-> todo o quadro, fundo totalmente transparente (PNG com canal alpha), sem sombra no
-> fundo, altíssima resolução, estética de fotografia gastronômica editorial.
-
-Trocando "partido ao meio" por "metade de cima de um cookie, vista de frente" e
-"metade de baixo de um cookie com recheio à mostra" você tira as outras camadas.
+**Fotografando o resto:** fundo liso e claro, luz natural pela lateral, sem flash,
+câmera na altura do cookie. Para render um produto em camadas (tipo o hambúrguer
+desmontado da referência), fotografe cada parte do mesmo ponto, sem mover o
+celular — aí as camadas encaixam sozinhas.
 
 **Sobre vídeo (Flow):** não vale pro hero. Vídeo com fundo transparente depende de
 WebM/alpha, que o Safari não toca — o cookie apareceria numa caixa preta no iPhone,
 que é metade do público. O Flow rende muito melhor num loop curto na seção do
 fondue (chocolate escorrendo) ou direto no Instagram, e aí é MP4 normal.
+
+### Slides
+
+Hoje são 2 destaques, ambos com foto real. Quando chegarem as fotos do fondue e do
+cookie com sorvete, duplicar um `<article class="hero__slide">` no `index.html`
+trocando texto e imagem — o slider conta os slides sozinho, não precisa configurar
+nada.
 
 ## O que está pendente de confirmação com a loja
 

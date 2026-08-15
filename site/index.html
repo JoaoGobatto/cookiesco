@@ -85,10 +85,10 @@
   <div class="wrap hero__in">
 
     <!-- ---------- slide 1 ---------- -->
-    <article class="hero__slide is-active" role="group" aria-label="1 de 3">
+    <article class="hero__slide is-active" role="group" aria-label="1 de 2">
       <div class="hero__copy">
         <p class="hero__over">Que tal pedir</p>
-        <h1>O nosso cookie<br>de pudim?</h1>
+        <h1>O nosso cookie<br>recheado?</h1>
         <p class="hero__tag">Delivery</p>
         <div class="hero__cta">
           <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Pedir agora 🍪</a>
@@ -96,43 +96,30 @@
         </div>
       </div>
 
-      <!-- palco do cookie interativo: cada camada é um PNG com fundo transparente -->
-      <div class="stage" data-stage="camadas">
-        <div class="stage__layer" data-layer="1" data-nome="metade de cima">
-          <img src="assets/img/hero/cookie-topo.png" alt="">
+      <!-- Cookie interativo. Cada camada é um recorte com fundo transparente que
+           anda em ritmo próprio com o mouse e se abre no hover.
+           Posição de cada uma: --l esquerda, --t topo, --w largura (% do palco). -->
+      <div class="stage">
+        <div class="stage__layer camada--inteiro" style="--l:-4%;--t:38%;--w:40%;--f:.45">
+          <img src="assets/img/hero/cookie-inteiro.webp" alt="Cookie recheado inteiro" width="857" height="888">
         </div>
-        <div class="stage__layer" data-layer="2" data-nome="recheio">
-          <img src="assets/img/hero/cookie-recheio.png" alt="">
+        <div class="stage__layer camada--chip" style="--l:14%;--t:10%;--w:6%;--f:2.6">
+          <img src="assets/img/hero/chip-2.webp" alt="" width="115" height="117">
         </div>
-        <div class="stage__layer" data-layer="3" data-nome="metade de baixo">
-          <img src="assets/img/hero/cookie-base.png" alt="Cookie de pudim partido ao meio, com o recheio à mostra">
+        <div class="stage__layer camada--partido" style="--l:24%;--t:-4%;--w:76%;--f:1.15">
+          <img src="assets/img/hero/cookie-partido.webp" alt="Cookie partido ao meio com recheio de creme e doce de leite escorrendo" width="925" height="1290" fetchpriority="high">
         </div>
-        <div class="stage__layer stage__layer--solto" data-layer="4" data-nome="pedaços">
-          <img src="assets/img/hero/cookie-pedacos.png" alt="">
+        <div class="stage__layer camada--chip" style="--l:93%;--t:46%;--w:6%;--f:3.1">
+          <img src="assets/img/hero/chip-3.webp" alt="" width="110" height="116">
+        </div>
+        <div class="stage__layer camada--chip" style="--l:34%;--t:88%;--w:6.5%;--f:2.2">
+          <img src="assets/img/hero/chip-1.webp" alt="" width="116" height="121">
         </div>
       </div>
     </article>
 
     <!-- ---------- slide 2 ---------- -->
-    <article class="hero__slide" role="group" aria-label="2 de 3" aria-hidden="true">
-      <div class="hero__copy">
-        <p class="hero__over">Quente ou gelado?</p>
-        <h1>Fondue de<br>cookie red velvet</h1>
-        <p class="hero__tag">Novidade</p>
-        <div class="hero__cta">
-          <a href="#" class="btn btn--dark btn--lg" data-link="pedido">Eu quero 🍫</a>
-          <a href="#fondue" class="btn btn--outline-dark btn--lg">Saber mais</a>
-        </div>
-      </div>
-      <div class="stage" data-stage="unico">
-        <div class="stage__layer" data-layer="3" data-nome="fondue">
-          <img src="assets/img/hero/fondue.png" alt="Fondue de cookie Red Velvet">
-        </div>
-      </div>
-    </article>
-
-    <!-- ---------- slide 3 ---------- -->
-    <article class="hero__slide" role="group" aria-label="3 de 3" aria-hidden="true">
+    <article class="hero__slide" role="group" aria-label="2 de 2" aria-hidden="true">
       <div class="hero__copy">
         <p class="hero__over">Hey cookie lovers 🧡</p>
         <h1>Cookies que nunca<br>decepcionam</h1>
@@ -142,12 +129,21 @@
           <a href="#onde" class="btn btn--outline-dark btn--lg">Onde estamos</a>
         </div>
       </div>
-      <div class="stage" data-stage="unico">
-        <div class="stage__layer" data-layer="3" data-nome="cookie com sorvete">
-          <img src="assets/img/hero/cookie-sorvete.png" alt="Cookie quente com bola de sorvete">
+      <div class="stage">
+        <div class="stage__layer camada--solo" style="--l:14%;--t:8%;--w:72%;--f:.9">
+          <img src="assets/img/hero/cookie-inteiro.webp" alt="Cookie recheado inteiro" loading="lazy" width="857" height="888">
+        </div>
+        <div class="stage__layer camada--chip" style="--l:84%;--t:22%;--w:7%;--f:3">
+          <img src="assets/img/hero/chip-2.webp" alt="" loading="lazy" width="115" height="117">
+        </div>
+        <div class="stage__layer camada--chip" style="--l:6%;--t:74%;--w:7%;--f:2.4">
+          <img src="assets/img/hero/chip-1.webp" alt="" loading="lazy" width="116" height="121">
         </div>
       </div>
     </article>
+
+    <!-- Quando chegarem as fotos do fondue e do cookie com sorvete, é só duplicar
+         um slide acima trocando texto e imagem — o slider já conta os slides sozinho. -->
   </div>
 
   <div class="hero__arrows">

@@ -13,7 +13,9 @@
       Sem isso os botões PEDIR AGORA ficam inertes
 - [ ] Confirmar o endereço com a loja — divergência entre plataformas (`_memoria/empresa.md`).
       Enquanto isso o site mostra só "Trindade — Florianópolis/SC"
-- [ ] Receber fotos em alta dos produtos — nomes esperados em `site/README.md`
+- [x] Foto do cookie recebida e recortada em camadas pro hero (`site/assets/img/hero/`)
+- [ ] Receber as fotos que faltam (fondue, cookie com sorvete, loja, galeria, Instagram)
+      — nomes esperados em `site/README.md`
 - [ ] Receber logo em `identidade/logo.png` ou `.svg` (hoje o header usa marca em texto)
 - [ ] Confirmar sabores e preços atuais do cardápio
 
