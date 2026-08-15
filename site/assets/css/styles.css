@@ -141,6 +141,38 @@ p{margin:0 0 1rem}
 .btn--pulsa:hover{animation:none}
 
 /* ============================================================
+   CORTINA DE ABERTURA
+   Duas folhas cobrindo a tela. Elas saem pra cima em sequência, e o que
+   estava atrás aparece. O CSS já as deixa no lugar antes de qualquer JS,
+   então não existe o quadro em que o site aparece sem cortina.
+   ============================================================ */
+.cortina{position:fixed;inset:0;z-index:200;pointer-events:none;display:none}
+/* enquanto o CSS manda (antes do JS pegar), a cortina acompanha o .carregando */
+.carregando .cortina{display:block;pointer-events:auto}
+/* quando o JS assume, ela passa a depender só de si: soltar o conteúdo pra
+   cascata não pode fazer a cortina sumir no meio do movimento */
+.cortina.is-ativa{display:block;pointer-events:auto}
+.cortina__folha{position:absolute;inset:0;will-change:transform}
+.cortina__folha--a{background:var(--marrom-esc);display:grid;place-items:center;z-index:2}
+.cortina__folha--b{background:var(--peach);z-index:1}
+.cortina__logo{width:min(46vw,230px);height:auto}
+
+/* o que entra em cascata começa invisível — mas só enquanto o JS estiver no
+   comando. Sem JS, ou se ele falhar, a página aparece inteira. */
+.carregando [data-entra],
+.carregando [data-entra-grade],
+.carregando [data-entra-hero] .hero__copy > *,
+.carregando [data-entra-hero] .stage{opacity:0}
+
+@media (prefers-reduced-motion:reduce){
+  .cortina{display:none!important}
+  .carregando [data-entra],
+  .carregando [data-entra-grade],
+  .carregando [data-entra-hero] .hero__copy > *,
+  .carregando [data-entra-hero] .stage{opacity:1}
+}
+
+/* ============================================================
    HEADER — menu em caixa alta à esquerda, logo no centro, CTA à
    direita e a barra sangrando na borda, como na referência.
    ============================================================ */
@@ -520,7 +552,8 @@ p{margin:0 0 1rem}
 .ft__nav a:hover{color:var(--peach)}
 .ft__cta{display:grid;justify-items:start;gap:12px}
 .ft__cta p{font-size:.88rem;opacity:.75;margin:0}
-.ft__copy{text-align:center;font-size:.8rem;opacity:.6;margin:38px 0 0;padding-top:22px;border-top:1px solid rgba(255,243,233,.14)}
+.ft__copy{text-align:center;font-size:.8rem;opacity:.6;margin:38px 0 0;padding-top:22px;border-top:1px solid rgba(255,243,233,.14);line-height:1.9}
+.ft__autor{opacity:.8}
 
 /* ============ FAB MOBILE ============ */
 .fab{

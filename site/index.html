@@ -16,8 +16,28 @@
 <link rel="preload" href="assets/fonts/dmsans-latin-40fe3c.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css?v=3">
 <link rel="stylesheet" href="assets/css/styles.css?v=3">
+
+<script>
+  /* Marca o documento antes da primeira pintura: o CSS esconde o que vai ser
+     animado e mostra a cortina. Se o JS da animação não rodar em 3s (falha de
+     rede, erro), o próprio script solta tudo — o site nunca fica preso atrás
+     da cortina. */
+  document.documentElement.classList.add('carregando');
+  setTimeout(function () { document.documentElement.classList.remove('carregando'); }, 3000);
+</script>
 </head>
 <body>
+
+<!-- ============================================================
+     CORTINA DE ABERTURA — duas cores deslizam pra cima em sequência
+     e revelam o site. O JS fica em assets/js/intro.js.
+     ============================================================ -->
+<div class="cortina" id="cortina" aria-hidden="true">
+  <div class="cortina__folha cortina__folha--b"></div>
+  <div class="cortina__folha cortina__folha--a">
+    <img class="cortina__logo" src="assets/img/logo-claro.webp?v=3" alt="" width="324" height="242">
+  </div>
+</div>
 
 <!-- ============================================================
      HEADER — mesma arquitetura da referência: menu em caixa alta à
@@ -26,19 +46,19 @@
      ============================================================ -->
 <header class="hd" id="hd">
   <div class="wrap hd__in">
-    <nav class="hd__nav" aria-label="Navegação principal">
+    <nav class="hd__nav" aria-label="Navegação principal" data-entra="menu">
       <a href="#top" class="is-atual">Home</a>
       <a href="#mais">O que tem</a>
       <a href="#avaliacoes">Avaliações</a>
       <a href="#contato">Contato</a>
     </nav>
 
-    <a class="brand" href="#top" aria-label="Cookies &amp; Co Floripa — início">
+    <a class="brand" data-entra href="#top" aria-label="Cookies &amp; Co Floripa — início">
       <img class="logo--claro" src="assets/img/logo-claro.webp?v=3" alt="Cookies &amp; Co Floripa" width="324" height="242">
       <img class="logo--marrom" src="assets/img/logo-marrom.webp?v=3" alt="" aria-hidden="true" width="324" height="242">
     </a>
 
-    <div class="hd__acoes">
+    <div class="hd__acoes" data-entra>
       <a href="#" class="btn btn--cta btn--sm" data-link="pedido">Pedir online</a>
     </div>
 
@@ -47,7 +67,7 @@
     </button>
   </div>
 
-  <a class="hd__grade" href="https://instagram.com/cookiescofloripa" target="_blank" rel="noopener"
+  <a class="hd__grade" data-entra-grade href="https://instagram.com/cookiescofloripa" target="_blank" rel="noopener"
      aria-label="Instagram da Cookies &amp; Co Floripa" title="@cookiescofloripa">
     <span aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
   </a>
@@ -78,7 +98,7 @@
     <span class="hero__ring hero__ring--2"></span>
   </div>
 
-  <div class="wrap hero__in">
+  <div class="wrap hero__in" data-entra-hero>
 
     <!-- Cada slide carrega o próprio tema. data-bg pinta o fundo da seção,
          data-blob e data-blob2 as formas orgânicas atrás do produto. A cor sai
@@ -318,12 +338,17 @@
       <p>Terça a domingo · 12:30 às 18:30</p>
     </div>
   </div>
-  <p class="ft__copy">© <span id="ano"></span> Cookies &amp; Co Floripa · Trindade, Florianópolis/SC</p>
+  <p class="ft__copy">
+    © <span id="ano"></span> Cookies &amp; Co Floripa · Trindade, Florianópolis/SC<br>
+    <span class="ft__autor">Site criado por João Felipe Gobatto</span>
+  </p>
 </footer>
 
 <!-- ============ BOTÃO FIXO MOBILE ============ -->
 <a href="#" class="fab" data-link="pedido">Pedir agora</a>
 
+<script src="assets/js/gsap.min.js?v=3"></script>
 <script src="assets/js/main.js?v=3"></script>
+<script src="assets/js/intro.js?v=3"></script>
 </body>
 </html>

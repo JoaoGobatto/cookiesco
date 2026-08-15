@@ -19,7 +19,8 @@ site/
 
 ## Estado atual — em construção, seção por seção
 
-A página tem hoje **header, hero, "muito mais que cookies" e avaliações**, mais rodapé.
+A página tem hoje **abertura animada, header, hero, "muito mais que cookies" e
+avaliações**, mais rodapé (com o crédito "Site criado por João Felipe Gobatto").
 A barra superior de contato e a faixa de quatro ícones abaixo do hero foram removidas
 a pedido do dono. As outras seções (anatomia do cookie, cardápio completo, delivery, motivos,
 galeria, Instagram, localização) foram removidas de propósito para serem refeitas uma
@@ -317,6 +318,54 @@ não só a cor dele.
 
 Sem emoji nos rótulos.
 
+## Abertura da página
+
+Quem entra no site vê, nessa ordem: a tela coberta de marrom com o logo claro no
+meio → o logo some → o marrom desliza pra cima → logo atrás dele o peach desliza
+também → o site aparece e os elementos entram em fila (menu, logo, botões, título,
+descrição, CTAs e por último o cookie).
+
+Três arquivos participam:
+
+- **`index.html`** — a cortina (`.cortina`, duas folhas + logo) logo depois do
+  `<body>`, e um script de três linhas no `<head>` que marca `<html class="carregando">`.
+  Esse script é inline de propósito: se ele esperasse o CSS ou o JS do rodapé,
+  a página piscaria o conteúdo antes da cortina cobrir. Ele também tem um
+  `setTimeout` de 3s que solta tudo caso a animação nunca rode.
+- **`assets/css/styles.css`** — desenha a cortina e, enquanto `.carregando` estiver
+  na raiz, deixa em `opacity:0` tudo que tem `data-entra`, `data-entra-grade` ou
+  está dentro de `[data-entra-hero]`.
+- **`assets/js/intro.js`** — a linha do tempo em GSAP.
+
+Os ajustes ficam todos no objeto `ABERTURA`, no topo do `intro.js`:
+
+| Chave | O que faz |
+| --- | --- |
+| `umaVezPorSessao` | `true` mostra a cortina só na primeira visita da aba (usa `sessionStorage`) |
+| `folha` | quanto cada cor leva pra sair (0.75s) |
+| `entreFolhas` | atraso da segunda cor em relação à primeira (0.16s) |
+| `cascata` | intervalo entre um elemento e o próximo (0.07s) |
+
+Pra escolher quais elementos entram em cascata, basta marcar no HTML: `data-entra`
+num elemento (ou no pai, que aí entram os filhos), `data-entra-grade` num bloco
+inteiro, `data-entra-hero` na área do hero. Nada de listar seletor no JS.
+
+Duas decisões que valem lembrar:
+
+- **Os tempos são absolutos** (`T_FOLHA`, `T_CASCATA`…), não relativos (`'-=0.5'`).
+  Posição relativa depende da duração acumulada no momento em que a linha é montada
+  — na primeira versão o `-=0.5` caiu em 200ms e a cascata rodou atrás da cortina.
+- **A cortina ganha `.is-ativa` quando o JS assume.** Antes ela dependia só de
+  `.carregando`; como a classe é removida no meio do deslize (pra deixar os elementos
+  aparecerem), a cortina sumia no meio do caminho.
+
+Se o GSAP não carregar, se o navegador pedir `prefers-reduced-motion: reduce`, ou se
+o JS estiver desligado, a cortina é removida na hora e o site aparece inteiro, sem
+animação. Nunca fica preso atrás dela.
+
+O GSAP é auto-hospedado em `assets/js/gsap.min.js` (3.13.0, 72 KB). Nenhum CDN —
+o site continua sem depender de nada externo.
+
 ## O que está pendente de confirmação com a loja
 
 - **Endereço.** O site mostra só "Trindade — Florianópolis/SC", de propósito. As
@@ -405,7 +454,8 @@ essas entram pela primeira vez, não têm versão velha presa em lugar nenhum.
 
 ## Detalhes técnicos
 
-- Sem framework, sem build, sem CDN. Uma requisição de CSS, uma de JS, seis de fonte.
+- Sem framework, sem build, sem CDN. Uma requisição de CSS, três de JS (GSAP, comportamento
+  e abertura), seis de fonte.
 - Acessibilidade: `aria-selected` nas abas, `aria-expanded` no menu, `alt` em todas as
   imagens, foco visível, e `prefers-reduced-motion` desliga todas as animações.
 - Responsivo em 1440 / 1024 / 390. Botão fixo `🛒 PEDIR AGORA` no rodapé do mobile.
