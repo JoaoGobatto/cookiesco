@@ -29,30 +29,38 @@
   </div>
 </div>
 
-<!-- ============ HEADER ============ -->
+<!-- ============================================================
+     HEADER — mesma arquitetura da referência: menu em caixa alta à
+     esquerda, logo centralizada, CTA em pill à direita e a barra
+     colorida sangrando na borda direita.
+     ============================================================ -->
 <header class="hd" id="hd">
   <div class="wrap hd__in">
-    <nav class="hd__nav hd__nav--l" aria-label="Navegação principal">
-      <a href="#cardapio">Cardápio</a>
+    <nav class="hd__nav" aria-label="Navegação principal">
+      <a href="#top" class="is-atual">Home</a>
       <a href="#ingredientes">Nossos cookies</a>
+      <a href="#cardapio">Cardápio</a>
       <a href="#avaliacoes">Avaliações</a>
+      <a href="#onde">Contato</a>
     </nav>
 
     <a class="brand" href="#top" aria-label="Cookies &amp; Co Floripa — início">
-      <span class="brand__mark" aria-hidden="true">🍪</span>
-      <span class="brand__txt">Cookies<em>&amp;</em>Co</span>
-      <span class="brand__sub">floripa</span>
+      <img src="assets/img/logo-marrom.webp" alt="Cookies &amp; Co Floripa" width="324" height="242">
     </a>
 
-    <div class="hd__nav hd__nav--r">
-      <a href="#onde" class="hd__link-onde">Onde estamos</a>
-      <a href="#" class="btn btn--primary btn--sm" data-link="pedido">Pedir agora 🍪</a>
+    <div class="hd__acoes">
+      <a href="#" class="btn btn--dark btn--sm" data-link="pedido">Pedir online</a>
     </div>
 
     <button class="hd__burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-mob">
       <span></span><span></span><span></span>
     </button>
   </div>
+
+  <a class="hd__grade" href="https://instagram.com/cookiescofloripa" target="_blank" rel="noopener"
+     aria-label="Instagram da Cookies &amp; Co Floripa" title="@cookiescofloripa">
+    <span aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  </a>
 
   <div class="menu-mob" id="menu-mob" hidden>
     <a href="#cardapio">Cardápio</a>
@@ -388,8 +396,8 @@
 <footer class="ft">
   <div class="wrap ft__in">
     <div class="ft__brand">
-      <span class="brand__txt">Cookies<em>&amp;</em>Co</span>
-      <p class="hand">Cookies, 'cause they never&nbsp;disappoint&nbsp;🧡🍪</p>
+      <img src="assets/img/logo-claro.webp" alt="Cookies &amp; Co Floripa" width="324" height="242" loading="lazy">
+      <p class="hand">Cookies, 'cause they never disappoint <span class="nowrap">🧡🍪</span></p>
     </div>
     <nav class="ft__nav" aria-label="Rodapé">
       <a href="#cardapio">Cardápio</a>

@@ -72,6 +72,11 @@ entra sozinho — não precisa mexer no HTML. O hero tem regras próprias: veja
 | `insta-1.jpg` … `insta-6.jpg` | grid do Instagram (quadradas) |
 | `mapa.jpg` | print do mapa (ou trocar por um `<iframe>` do Google Maps) |
 
+A logo já está em `assets/img/`: `logo-marrom.webp` (header, fundos claros) e
+`logo-claro.webp` (rodapé, fundos escuros). As duas saíram do mesmo arquivo —
+o original é branco + peach, feito pra fundo escuro, então a versão marrom foi
+gerada recolorindo os traços pra não sumir em cima do peach do hero.
+
 Formato: JPG ou WebP, largura de uns 1200px nas grandes e 800px nas quadradas.
 
 **3. O cardápio.** Também em `assets/js/main.js`, na lista `CARDAPIO`. Cada item:
@@ -156,8 +161,8 @@ nada.
   Vale a loja ler e aprovar antes de publicar.
 - **Avaliações.** As três citadas vieram de avaliações públicas. Confirmar se pode
   usar e, idealmente, trocar "Avaliação no Google" pelo primeiro nome de quem escreveu.
-- **Logo.** Hoje o header usa a marca em texto (Baloo 2). Quando o arquivo estiver em
-  `identidade/logo.svg`, dá pra trocar em 2 linhas.
+- **Logo em vetor.** O PNG de 336px que temos serve bem no header (52-68px de altura)
+  e no rodapé (190px). Pra qualquer peça maior, pedir o SVG/AI pra quem desenhou.
 - **Horário.** "Terça a domingo, 12:30 às 18:30" veio do cardápio online.
 
 ## Publicação (Vercel)

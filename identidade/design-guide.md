@@ -73,10 +73,20 @@ de cookie quente. Foto pequena é erro.
 
 ## Logo
 
-- **Arquivo:** *(pendente — jogar em `identidade/logo.png` ou `.svg`)*
-- **Versão pra fundo escuro:** *(pendente)*
-- **Onde usar:** header do site, slide final do carrossel (CTA), rodapé
-- **Tamanho sugerido:** largura entre 120-200px nos HTMLs
+Emblema circular: cookie mordido em traço fino, com "Cookies&co" e "floripa"
+manuscrito dentro. O original veio em duas cores — texto branco e cookie peach —
+ou seja, desenhado pra fundo escuro.
+
+- **Original (branco + peach), pra fundo escuro:** `identidade/logo.png`
+- **Versão marrom monocromática, pra fundo claro:** `identidade/logo-marrom.png`
+  (usada no header, sobre o peach do hero e sobre o creme quando o header fixa)
+- **Versão clara:** `identidade/logo-branco.png` (usada no rodapé marrom)
+- **No site:** `site/assets/img/logo-marrom.webp` e `logo-claro.webp`
+- **Onde usar:** header e rodapé do site, slide final do carrossel (CTA)
+- **Tamanho:** altura de 52-68px no header, largura ~190px no rodapé
+
+> O arquivo que temos é PNG de 336px. Serve bem nesses tamanhos, mas pra material
+> impresso ou peça grande vale pedir o vetor (SVG/AI) pra quem desenhou.
 
 ---
 
